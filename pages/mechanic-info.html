@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serwis samochodowy - informacje o mechaniku</title>
+</head>
+<body>
+    <header>
+        <link rel="stylesheet" href="../css/style.css" />
+        <h1>Serwis samochodowy u Stanisława</h1>
+        <img src="/images/logo.png" alt="Logo firmy" width="200" height="200">
+    </header>
+    <nav>
+        <ul>
+            <li><a href="../index.html">Strona główna</a></li>
+            <li><a href="/pages/mechanics-list.html" class="active">Lista mechaników</a></li>
+            <li><a href="">Lista pojazdów</a></li>
+            <li><a href="">Naprawy</a></li>
+        </ul>
+    </nav>
+    <main>
+        <h2>
+            Szczegóły o mechaniku
+        </h2>
+    <form class="form">         
+        <div class="form-group">
+        <label for="lastname" class="bold-txt">Nazwisko: </label>
+        <input type="text" name="lastname" value="Kowalski" id="lastname" disabled />
+    </div>
+    <div class="form-group" >
+        <label for="firstname" class="bold-txt">Imie: </label>
+        <input type="text" name="firstname" value="Stefan" id="firstname" disabled />
+    </div>
+    <div class="form-group">
+        <label for="exp" class="bold-txt">Doświadczenie: </label>
+        <input type="text" name="exp" value="Certyfikat AutoKasacja 2013" id="exp" disabled />
+    </div>
+    </form>
+    <a href="" class="list-actions-button-edit">Edytuj</a>  
+    <h2>
+        Lista napraw:
+    </h2>
+
+    <table class="table-list">
+        <thead>
+            <tr>
+                <th>Opis Uszkodzenia</th>
+                <th>Marka pojazdu</th>
+                <th>Przebieg</th>
+                <th>Data naprawy</th>
+                <th>Koszt naprawy</th>
+            </tr>
+        </thead>
+        
+    
+        <tbody>
+            <tr>
+                <td>Uszkodzona chłodnica</td>
+                <td>BMW</td>
+                <td>204890</td>
+                <td>2020-10-24</td>
+                <td>1760 zł</td>
+            
+            </tr>
+            <tr>
+                <td>Uszkodzony zderzak</td>
+                <td>Fiat</td>
+                <td>15032</td>
+                <td>2020-10-24</td>
+                <td>900 zł</td>
+            
+            </tr>
+            <!-- Tu wstaw dodatkowe wiersze -->
+        </tbody>
+        </table>
+
+        <a href="/pages/mechanics-list.html" class="list-actions-button-details form-buttons">Powrót</a>  
+
+
+</main>
+<footer>
+    Krzysztof Baka, s16696
+</footer>
+
+
+</body>
+</html>

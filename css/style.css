@@ -1,0 +1,291 @@
+html {
+    background-color: #ecf0f1;
+    font-family: sans-serif;
+}
+body {
+  min-width: 600px;
+}
+
+/* Kolor tła */
+header, 
+main, 
+footer {
+    background-color: white;
+}
+
+/* Marginesy */
+header,
+main,
+footer,
+nav {
+    margin: 1rem;
+}
+
+/* Formatowanie dla nagłówka i stopki */
+header, 
+footer {
+    background-color: #34495e;
+    color: white;
+    padding: 1rem;
+}
+
+/* overflow: auto zapobiegnie ‘zapadnięciu’ 
+się nagłówka po użyciu właściwości float przy rozkładzie elementów h1 oraz img*/
+
+header {
+    overflow: auto;
+}
+
+header h1 {
+    float: left;
+}
+
+header img {
+    float: right;
+}
+
+/* zmienia belki nawigacyjnej */
+
+nav {
+    background-color: #bdc3c7;
+}
+
+nav ul {
+    padding: 0;
+    overflow: hidden;
+    list-style-type: none;
+}
+
+nav ul li {
+    float: left;
+}
+
+nav ul li a {
+    display: inline-block;
+    color: #2c3e50;
+    padding: 1rem 2rem;
+    text-decoration: none;
+}
+
+/* Ustawienie zachowania po najechaniu na element menu: */
+nav ul li a:hover {
+    background-color: #d35400;
+    color: #ecf0f1;
+}
+
+/* Stworzenie klasy do oznaczenia elementu menu, który jest aktualnie wybrany */
+nav ul li a.active {
+    background-color: #95a5a6;
+    color: #ecf0f1;
+}
+
+/* Ustawienie dopełnienia aby odsunąć zawartość od obramowania: */
+main {
+    padding: 1.5rem;
+}
+
+footer {
+    text-align: center;
+}
+
+main h2 {
+    border-bottom: 1px solid #7f8c8d;
+    margin-bottom: 2rem;
+}
+
+
+/* tabela rozciagniecie tabeli*/
+.table-list {
+    border-collapse: collapse;
+    color:#2c3e50;
+    width: 100%;
+}
+
+/*obramowanie tabeli*/
+.table-list,
+.table-list th,
+.table-list td {
+    border: 1px solid #ecf0f1;
+}
+
+/*odsunięcie obramowania*/
+.table-list th,
+.table-list td {
+    padding: 0.5rem;
+}
+
+/*ustawienie tła nagłowka i naprzemiennych wierszy */
+.table-list th,
+.table-list tbody tr:nth-child(even) {
+    background-color: #ecf0f1;
+}
+
+.list-actions {
+    margin: 0;
+    text-align: center;
+    list-style-type: none;
+    padding: 0;
+}
+
+.list-actions li {
+    display: inline-block;
+}
+
+.list-actions-button-details,
+.list-actions-button-edit,
+.list-actions-button-delete {
+    display: inline-block;
+    width: 75px;
+    padding: 0.25rem 0.5rem;
+}
+
+.list-actions-button-details,
+.list-actions-button-edit,
+.list-actions-button-delete {
+    border: none;
+    border-radius: 5px;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    font-size: 0.8rem;
+}
+
+.list-actions-button-details,
+.list-actions-button-edit {
+    margin-right: 1rem;
+}
+
+/*details*/
+.list-actions-button-details {
+    background-color: #2980b9;    
+}
+.list-actions-button-details:hover {
+    background-color: #3498db;
+}
+
+/*edit*/
+.list-actions-button-edit {
+    background-color: #f39c12;
+}
+
+.list-actions-button-edit:hover {
+    background-color: #f1c40f;
+}
+
+/*delete*/
+.list-actions-button-delete {
+    background-color: #c0392b;
+}
+
+.list-actions-button-delete:hover {
+    background-color: #e74c3c;
+}
+
+/* add button */
+.list-actions-button-details,
+.list-actions-button-edit,
+.list-actions-button-delete,
+.button-add,
+.form-button-submit,
+.form-button-cancel {
+    border: none;
+    border-radius: 5px;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    font-size: 0.8rem;
+}
+.button-add,
+.form-button-submit,
+.form-button-cancel {
+    padding: 0.5rem 1rem;
+}
+
+.button-add,
+.form-button-submit
+{
+    background-color: #27ae60;
+}
+
+.button-add:hover,
+.form-button-submit:hover
+{
+    background-color: #2ecc71;
+}
+
+/* add mechanic form */
+button, 
+input, 
+select, 
+textarea { 
+    font-family: inherit; 
+    font-size: 100%; 
+    box-sizing: border-box; 
+    padding: 0; margin: 0; 
+} 
+
+textarea { 
+    overflow: auto; 
+}
+
+.form {
+    margin-left: 2rem;
+    width: 300px;
+}
+
+.form select, 
+.form input[type="text"],
+.form input[type="number"],
+.form input[type="date"],
+.form input[type="email"] {
+    border: 1px solid #7f8c8d;
+    color:#2c3e50;
+    border-radius: 5px;
+    padding: 0.5rem;
+    width: 100%;
+}
+
+.form label {
+    display: block;
+    margin-bottom: 0.5em;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.bold-txt{
+    font-weight: bold;
+}
+
+abbr[title='required'] {
+    color: #c0392b;
+}
+
+.form-buttons{
+    margin-top: 2rem;
+}
+
+.form-button-cancel,
+.list-actions-button-delete {
+    background-color: #c0392b;
+}
+
+.form-button-cancel:hover,
+.list-actions-button-delete:hover {
+    background-color: #e74c3c;
+}
+
+.form-button-submit,
+.form-button-cancel {
+    width: 100%;
+}
+
+.form-button-cancel {
+    box-sizing: border-box;
+    display: block;
+}
+
+.form-button-submit {
+    margin-bottom: 0.5rem;
+}
