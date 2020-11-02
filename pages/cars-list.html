@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../css/style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serwis samochodowy - lista pojazdów</title>
+</head>
+<body>
+    <header>
+        <h1>Serwis samochodowy u Stanisława</h1>
+        <img src="/images/logo.png" alt="Logo firmy" width="200" height="200">
+    </header>
+    <nav>
+        <ul>
+            <li><a href="../index.html">Strona główna</a></li>
+            <li><a href="/pages/mechanics-list.html">Lista mechaników</a></li>
+            <li><a href="../pages/cars-list.html" class="active">Lista pojazdów</a></li>
+            <li><a href="../pages/repair-list.html">Naprawy</a></li>
+        </ul>
+    </nav>
+    <main>
+        <h2>Lista pojazdów</h2>
+    <table class="table-list">
+    <thead>
+        <tr>
+            <th>Marka</th>
+            <th>Przebieg</th>
+            <th>Akcje</th>
+        </tr>
+    </thead>
+    
+
+    <tbody>
+        <tr>
+            <td>Alfa Romeo</td>
+            <td>192564 km</td>
+            <td>
+                <ul class="list-actions">
+                    <li>
+                        <a href="../pages/car-info.html" class="list-actions-button-details">Szczegóły</a>
+                    </li>
+                    <li>
+                        <a href="" class="list-actions-button-edit">Edytuj</a>
+                    </li>
+                    <li>
+                        <a href="" class="list-actions-button-delete">Usuń</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>Audi</td>
+            <td>322564 km</td>
+            <td>
+                <ul class="list-actions">
+                    <li>
+                        <a href="../pages/car-info.html" class="list-actions-button-details">Szczegóły</a>
+                    </li>
+                    <li>
+                        <a href="" class="list-actions-button-edit">Edytuj</a>
+                    </li>
+                    <li>
+                        <a href="" class="list-actions-button-delete">Usuń</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+        <!-- Tu wstaw dodatkowe wiersze -->
+    </tbody>
+    </table>
+
+    <p><a href="/pages/car-form.html" class="button-add">Dodaj nowy pojazd</a></p>
+</main>
+    <footer>
+        Krzysztof Baka, s16696
+    </footer>
+    
+</body>
+</html>

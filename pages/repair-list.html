@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serwis samochodowy - informacje o mechaniku</title>
+</head>
+<body>
+    <header>
+        <link rel="stylesheet" href="../css/style.css" />
+        <h1>Serwis samochodowy u Stanisława</h1>
+        <img src="/images/logo.png" alt="Logo firmy" width="200" height="200">
+    </header>
+    <nav>
+        <ul>
+            <li><a href="../index.html">Strona główna</a></li>
+            <li><a href="/pages/mechanics-list.html">Lista mechaników</a></li>
+            <li><a href="../pages/cars-list.html">Lista pojazdów</a></li>
+            <li><a href="../pages/repair-list.html" class="active">Naprawy</a></li>
+        </ul>
+    </nav>
+    <main>
+    <h2>
+        Lista wykonanych napraw:
+    </h2>
+
+    <table class="table-list">
+        <thead>
+            <tr>
+                <th>Opis Uszkodzenia</th>
+                <th>Kto wykonał naprawę</th>
+                <th>Marka pojazdu</th>
+                <th>Data naprawy</th>
+                <th>Koszt naprawy</th>
+                <th>Akcje</th>
+            </tr>
+        </thead>
+        
+    
+        <tbody>
+            <tr>
+                <td>Uszkodzona chłodnica</td>
+                <td>Kowalski</td>
+                <td>BMW</td>
+                <td>2020-10-24</td>
+                <td>1760 zł</td>
+                <td>
+                    <ul class="list-actions">
+                        <li>
+                            <a href="../pages/repair-info.html" class="list-actions-button-details">Szczegóły</a>
+                        </li>
+                        <li>
+                            <a href="" class="list-actions-button-edit">Edytuj</a>
+                        </li>
+                        <li>
+                            <a href="" class="list-actions-button-delete">Usuń</a>
+                        </li>
+                    </ul>
+                </td>
+            
+            </tr>
+            <tr>
+                <td>Uszkodzony zderzak</td>
+                <td>Nowak</td>
+                <td>Fiat</td>
+                <td>2020-10-24</td>
+                <td>900 zł</td>
+                <td>
+                    <ul class="list-actions">
+                        <li>
+                            <a href="../pages/repair-info.html" class="list-actions-button-details">Szczegóły</a>
+                        </li>
+                        <li>
+                            <a href="" class="list-actions-button-edit">Edytuj</a>
+                        </li>
+                        <li>
+                            <a href="" class="list-actions-button-delete">Usuń</a>
+                        </li>
+                    </ul>
+                </td>
+            
+            </tr>
+        </tbody>
+        </table>
+
+        <p><a href="../pages/repair-form.html" class="button-add">Dodaj nową naprawę</a></p>
+
+
+</main>
+<footer>
+    Krzysztof Baka, s16696
+</footer>
+
+
+</body>
+</html>

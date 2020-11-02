@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serwis samochodowy - informacje o pojeździe</title>
+</head>
+<body>
+    <header>
+        <link rel="stylesheet" href="../css/style.css" />
+        <h1>Serwis samochodowy u Stanisława</h1>
+        <img src="/images/logo.png" alt="Logo firmy" width="200" height="200">
+    </header>
+    <nav>
+        <ul>
+            <li><a href="../index.html">Strona główna</a></li>
+            <li><a href="/pages/mechanics-list.html">Lista mechaników</a></li>
+            <li><a href="../pages/cars-list.html">Lista pojazdów</a></li>
+            <li><a href="../pages/repair-list.html" class="active">Naprawy</a></li>
+        </ul>
+    </nav>
+    <main>
+        <h2>
+            Szczegóły naprawy
+        </h2>
+    <form class="form">         
+        <div class="form-group">
+        <label for="damage" class="bold-txt">Uszkodzenia: </label>
+        <input type="text" name="damage" value="Uszkodzona chłodnica" id="damage" disabled />
+    </div>
+    <div class="form-group" >
+        <label for="date" class="bold-txt">Data naprawy: </label>
+        <input type="text" name="date" value="2020-10-24" id="mileage" disabled />
+    </div>
+    <div class="form-group" >
+        <label for="mechanicname" class="bold-txt">Nazwisko mechanika: </label>
+        <input type="text" name="mechanicname" value="Kowalski" id="mechanicname" disabled />
+    </div>
+    <div class="form-group" >
+        <label for="car" class="bold-txt">Pojazd: </label>
+        <input type="text" name="car" value="Alfa Romeo" id="car" disabled />
+    </div>
+    </form>
+    <a href="" class="list-actions-button-edit">Edytuj</a>  
+    <h2>
+        Mechanik:
+    </h2>
+
+    <table class="table-list">
+        <thead>
+            <tr>
+                <th>Nazwisko</th>
+                <th>Imie</th>
+                <th>Doświadczenie</th>
+            </tr>
+        </thead>
+        
+    
+        <tbody>
+            <tr>
+                <td>Kowalski</td>
+                <td>Stefan</td>
+                <td>Certyfikat AutoKasacja 2013</td>
+            </tr>
+            <!-- Tu wstaw dodatkowe wiersze -->
+        </tbody>
+        </table>
+        <br>
+        <h2>
+            Pojazd:
+        </h2>
+    
+        <table class="table-list">
+            <thead>
+                <tr>
+                    <th>Marka</th>
+                    <th>Przebieg</th>
+                </tr>
+            </thead>
+            
+        
+            <tbody>
+                <tr>
+                    <td>Alfa Romeo</td>
+                    <td>192564</td>
+                </tr>
+                <!-- Tu wstaw dodatkowe wiersze -->
+            </tbody>
+            </table>
+        <a href="/pages/repair-list.html" class="list-actions-button-details form-buttons">Powrót</a>  
+
+
+</main>
+<footer>
+    Krzysztof Baka, s16696
+</footer>
+
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serwis samochodowy - dodanie mechanika</title>
+</head>
+<body>
+    <header>
+        <link rel="stylesheet" href="../css/style.css" />
+        <h1>Serwis samochodowy u Stanisława</h1>
+        <img src="/images/logo.png" alt="Logo firmy" width="200" height="200">
+    </header>
+    <nav>
+        <ul>
+            <li><a href="../index.html">Strona główna</a></li>
+            <li><a href="/pages/mechanics-list.html">Lista mechaników</a></li>
+            <li><a href="../pages/cars-list.html">Lista pojazdów</a></li>
+            <li><a href="../pages/repair-list.html" class="active">Naprawy</a></li>
+        </ul>
+    </nav>
+    <main>
+        <h2>
+            Dodaj nową naprawę
+        </h2>
+    <form class="form">        
+        <div class="form-group">
+        <label for="damage">Opis uszkodzenia: <abbr title="required" aria-label="required">*</abbr></label>
+        <input type="text" name="damage" id="damage">
+    </div>
+    <div class="form-group">
+        <label for="date">Data: <abbr title="required" aria-label="required">*</abbr></label>
+        <input type="text" name="date" id="date">
+    </div>
+
+    <div class="form-group">
+        <label for="mechanic">Wybierz mechanika: <abbr title="required" aria-label="required">*</abbr></label>
+        <select name="mechanic">
+            <option>Kowalski</option>
+            <option>Nowak</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="car">Wybierz pojazd: <abbr title="required" aria-label="required">*</abbr></label>
+        <select name="car">
+            <option>Alfa Romeo</option>
+            <option>Audi</option>
+        </select>
+    </form>
+
+    <input type="submit" value="Dodaj" class="form-button-submit form-buttons"/>
+    <a href="../pages/repair-list.html" class="form-button-cancel">Anuluj</a>  
+    </div>
+
+</main>
+    <footer>
+        Krzysztof Baka, s16696
+    </footer>
+
+
+</body>
+</html>
