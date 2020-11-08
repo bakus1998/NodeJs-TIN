@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Serwis samochodowy - dodanie mechanika</title>
+    <title>Serwis samochodowy - zmiana danych</title>
 </head>
 <body>
     <header>
@@ -21,18 +21,18 @@
     </nav>
     <main>
         <h2>
-            Dodaj nowy pojazd
+            Aktualizuj dane
         </h2>
 
     <form class="form">        
         <label for="name">Marka: <abbr title="required" aria-label="required">*</abbr></label>
-        <input type="text" name="name" id="name">
+        <input type="text" name="name" value="Alfa Romeo" id="name">
         <label for="mileage">Przebieg: <abbr title="required" aria-label="required">*</abbr></label>
-        <input type="text" name="mileage" id="mileage">
+        <input type="text" name="mileage" value="192564 km" id="mileage">
 
     <div class="form-buttons">
-    <input type="submit" value="Dodaj" class="form-button-submit"/>
-    <a href="../pages/cars-list.html" class="form-button-cancel">Anuluj</a>  
+    <input type="submit" value="Aktualizuj" class="form-button-submit"/>
+    <a href="../pages/car-info.html" class="form-button-cancel">Anuluj</a>  
     </div>
     </form>
 

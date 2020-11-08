@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Serwis samochodowy - dodanie naprawy</title>
+    <title>Serwis samochodowy - aktualizacja danych</title>
 </head>
 <body>
     <header>
@@ -21,16 +21,16 @@
     </nav>
     <main>
         <h2>
-            Dodaj nową naprawę
+            Aktualizuj dane
         </h2>
     <form class="form">   
 
         <label for="damage">Opis uszkodzenia: <abbr title="required" aria-label="required">*</abbr></label>
-        <input type="text" name="damage" id="damage">
+        <input type="text" name="damage" value="Uszkodzona chłodnica" id="damage">
 
 
         <label for="date">Data: <abbr title="required" aria-label="required">*</abbr></label>
-        <input type="text" name="date" id="date">
+        <input type="text" name="date" value="2020-10-24" id="date">
 
         <label>Mechanik: <abbr title="required" aria-label="required">*</abbr></label>
         <select name="mechanic">
@@ -46,8 +46,8 @@
         </select>
 
     <div class="form-buttons">
-    <input type="submit" value="Dodaj" class="form-button-submit form-buttons"/>
-    <a href="../pages/repair-list.html" class="form-button-cancel">Anuluj</a>  
+    <input type="submit" value="Aktualizuj" class="form-button-submit form-buttons"/>
+    <a href="../pages/repair-info.html" class="form-button-cancel">Anuluj</a>  
     </div>
 </form>
 
