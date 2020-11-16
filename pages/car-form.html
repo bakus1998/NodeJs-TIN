@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rajdhani">
     <title>Serwis samochodowy - dodanie mechanika</title>
 </head>
 <body>
@@ -27,8 +28,18 @@
     <form class="form">        
         <label for="name">Marka: <abbr title="required" aria-label="required">*</abbr></label>
         <input type="text" name="name" id="name">
+
+        <label for="idr">Rejestracja: <abbr title="required" aria-label="required">*</abbr></label>
+        <input type="text" name="idr" id="idr">
+
         <label for="mileage">Przebieg: <abbr title="required" aria-label="required">*</abbr></label>
-        <input type="text" name="mileage" id="mileage">
+        <input type="number" name="mileage" id="mileage">
+
+        <label for="km_mil">Jednostka:</label>
+        <select name="km_mil" id="km_mil">
+        <option value="km">Kilometry</option>
+        <option value="mil">Mile</option>
+        </select>
 
     <div class="form-buttons">
     <input type="submit" value="Dodaj" class="form-button-submit"/>

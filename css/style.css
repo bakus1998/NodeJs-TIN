@@ -10,7 +10,7 @@ body {
 header, 
 main, 
 footer {
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.445);
 }
 
 /* Marginesy */
@@ -24,7 +24,7 @@ nav {
 /* Formatowanie dla nagłówka i stopki */
 header, 
 footer {
-    background-color: #34495e;
+    background-color: #af1414;
     color: white;
     padding: 1rem;
 }
@@ -35,12 +35,14 @@ Update: zmiana na flex*/
 header {
     display: flex;
     justify-content: space-between;
+    font-family: "Rajdhani";
+    font-size: 22px;
 }
 
 /* zmienia belki nawigacyjnej */
 
 nav {
-    background-color: #bdc3c7;
+    background-color: #e77b7b9f;
 }
 
 nav ul {
@@ -64,13 +66,13 @@ nav ul li a {
 
 /* Ustawienie zachowania po najechaniu na element menu: */
 nav ul li a:hover {
-    background-color: #d35400;
+    background-color: #e68507dc;
     color: #ecf0f1;
 }
 
 /* Stworzenie klasy do oznaczenia elementu menu, który jest aktualnie wybrany */
 nav ul li a.active {
-    background-color: #95a5a6;
+    background-color: #d6170ac5;
     color: #ecf0f1;
 }
 
@@ -132,21 +134,6 @@ main h2 {
     display: inline-block;
     width: 75px;
     padding: 0.25rem 0.5rem;
-}
-
-.list-actions-button-details,
-.list-actions-button-edit,
-.list-actions-button-delete {
-    border: none;
-    border-radius: 5px;
-    color: white;
-    text-decoration: none;
-    text-align: center;
-    font-size: 0.8rem;
-}
-
-.list-actions-button-details,
-.list-actions-button-edit {
     margin-right: 1rem;
 }
 
@@ -190,6 +177,8 @@ main h2 {
     text-align: center;
     font-size: 0.8rem;
 }
+
+
 .button-add,
 .form-button-submit,
 .form-button-cancel {
