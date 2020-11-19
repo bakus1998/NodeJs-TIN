@@ -18,7 +18,7 @@ header,
 main,
 footer,
 nav {
-    margin: 1rem;
+    margin: 0.8rem;
 }
 
 /* Formatowanie dla nagłówka i stopki */
@@ -26,7 +26,9 @@ header,
 footer {
     background-color: #af1414;
     color: white;
-    padding: 1rem;
+    font-family: "Rajdhani";
+    padding: 1.0rem;
+
 }
 
 /* overflow: auto zapobiegnie ‘zapadnięciu’ 
@@ -35,13 +37,15 @@ Update: zmiana na flex*/
 header {
     display: flex;
     justify-content: space-between;
-    font-family: "Rajdhani";
     font-size: 22px;
 }
 
 /* zmienia belki nawigacyjnej */
 
 nav {
+    font-family: "Rajdhani";
+    font-weight: bold;
+    font-size: 18px;
     background-color: #e77b7b9f;
 }
 
@@ -86,7 +90,9 @@ footer {
 }
 
 main h2 {
-    border-bottom: 1px solid #7f8c8d;
+    font-family: "Rajdhani";
+    font-size: 30px;
+    border-bottom: 1px solid #c70707;
     margin-bottom: 2rem;
 }
 
@@ -131,18 +137,25 @@ main h2 {
 .list-actions-button-details,
 .list-actions-button-edit,
 .list-actions-button-delete {
+    transition-duration: 0.4s;
     display: inline-block;
     width: 75px;
-    padding: 0.25rem 0.5rem;
+    padding: 0.30rem 0.5rem;
     margin-right: 1rem;
 }
 
+
+
 /*details*/
 .list-actions-button-details {
-    background-color: #2980b9;    
+  /*  background-color: #2980b9;  */
+    background-color: #4cae4f;      
+    
 }
 .list-actions-button-details:hover {
-    background-color: #3498db;
+   /* background-color: #3498db;*/
+   background-color: #428644;
+   color: white;
 }
 
 /*edit*/
@@ -188,6 +201,7 @@ main h2 {
 .button-add,
 .form-button-submit
 {
+    transition-duration: 0.4s;
     background-color: #27ae60;
 }
 

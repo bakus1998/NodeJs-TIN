@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rajdhani">
+    <link rel="icon" type="image/png" href="../images/favicon/favicon.ico"/>
     <title>Serwis samochodowy - dodanie naprawy</title>
 </head>
 <body>
     <header>
-        <link rel="stylesheet" href="../css/style.css" />
         <h1>Serwis samochodowy u Stanisława</h1>
         <img src="/images/logo.png" alt="Logo firmy" width="200" height="200">
     </header>
@@ -31,7 +32,7 @@
 
 
         <label for="date">Data: <abbr title="required" aria-label="required">*</abbr></label>
-        <input type="text" name="date" id="date">
+        <input type="date" name="date" id="date">
 
         <label>Mechanik: <abbr title="required" aria-label="required">*</abbr></label>
         <select name="mechanic">
@@ -40,10 +41,10 @@
         </select>
 
 
-        <label>Wybierz pojazd: <abbr title="required" aria-label="required">*</abbr></label>
+        <label>Wybierz pojazd (Rejestracja): <abbr title="required" aria-label="required">*</abbr></label>
         <select name="car">
-            <option>Alfa Romeo</option>
-            <option>Audi</option>
+            <option>WY 13920</option>
+            <option>WGM 20139</option>
         </select>
 
     <div class="form-buttons">
