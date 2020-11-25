@@ -6,6 +6,9 @@
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rajdhani">
     <link rel="icon" type="image/png" href="../images/favicon/favicon.ico"/>
+    <script type="application/javascript" src="../js/validationEmpForm.js"></script>
+    <script type="application/javascript" src="../js/validationCommon.js"></script>
+
     <title>Serwis samochodowy - dodanie mechanika</title>
 </head>
 <body>
@@ -17,7 +20,7 @@
     <nav>
         <ul>
             <li><a href="../index.html">Strona główna</a></li>
-            <li><a href="/pages/mechanics-list.html" class="active">Lista mechaników</a></li>
+            <li><a href="../pages/mechanics-list.html" class="active">Lista mechaników</a></li>
             <li><a href="../pages/cars-list.html">Lista pojazdów</a></li>
             <li><a href="../pages/repair-list.html">Naprawy</a></li>
         </ul>
@@ -26,22 +29,29 @@
         <h2>
             Dodaj nowego mechanika
         </h2>
-    <form class="form">        
-        <label for="lastname">Nazwisko: <abbr title="required" aria-label="required">*</abbr></label>
-        <input type="text" name="lastname" id="lastname">
-
-        <label for="firstname">Imie: <abbr title="required" aria-label="required">*</abbr></label>
-        <input type="text" name="firstname" id="firstname">
-
-        <label for="exp">Doświadczenie: </label>
-        <input type="text" name="exp" id="exp">
 
 
+        <form class="form" novalidate onsubmit="return validateForm();">
+            <label for="lastname">Nazwisko:<abbr title="required" aria-label="required">*</abbr></label>
+            <input type="text" name="lastname" id="lastname" placeholder="2-60 znaków"/>
+            <span id="errorLastName" class="errors-text"></span>
+        
+
+        <label for="firstname">Imię:<abbr title="required" aria-label="required">*</abbr></label>
+        <input type="text" name="firstname" id="firstname" placeholder="2-60 znaków" />
+        <span id="errorFirstName" class="errors-text"></span>
+
+
+        <label for="exp">Doświadczenie:<abbr title="required" aria-label="required">*</abbr></label>
+        <input type="text" name="exp" id="exp" placeholder="do 100 znaków" />
+        <span id="errorExp" class="errors-text"></span>
     
     <div class="form-buttons">
+    <p id="errorsSummary" class="errors-text"></p>
     <input type="submit" value="Dodaj" class="form-button-submit"/>
     <a href="../pages/mechanics-list.html" class="form-button-cancel">Anuluj</a>  
     </div>
+
 </form>
 
 </main>

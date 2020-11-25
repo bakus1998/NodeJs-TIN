@@ -233,14 +233,27 @@ textarea {
 }
 */
 
-.form-buttons {
-    grid-column-start: 1;
+.form-buttons{
+    grid-column-start: 1; 
     grid-column-end: -1;
+    grid-column: 1 / span 2;
 }
 
+/*
 .form {
     display: grid;
     grid-template-columns: 150px 300px;
+    row-gap: 1rem;
+    column-gap: 1rem;
+    grid-column: 1/ span 2;
+}
+*/
+
+.form {
+    
+    display: grid;
+    grid-template-columns: 150px 300px 1fr;
+    column-gap: 1rem;
     row-gap: 1rem;
 }
 
@@ -269,9 +282,11 @@ textarea {
     font-weight: bold;
 }
 
+/*
 abbr[title='required'] {
     color: #c0392b;
 }
+*/
 
 .form-buttons{
     margin-top: 2rem;
@@ -300,6 +315,22 @@ abbr[title='required'] {
 .form-button-submit {
     margin-bottom: 0.5rem;
 }
+
+
+
+.form input.error-input,
+.form select.error-input {
+  border: 3px solid #e74c3c
+}
+
+.errors-text,
+abbr[title='required'] {
+    color: #c0392b;
+    font-size: 0.85em;
+    line-height: 2.25rem;
+    font-weight: bold;
+}
+
 
 @media all and (max-width:720px) {
     header {
@@ -333,12 +364,17 @@ abbr[title='required'] {
         margin-left: unset;
     }
 
+    .form .errors-text {
+        margin-bottom: 1rem;
+    }
+/*
     .form input[type="text"],
     .form input[type="number"],
     .form input[type="date"],
     .form select {
         margin-bottom: 1rem;
     }
+    */
 
 }
 

@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rajdhani">
     <link rel="icon" type="image/png" href="../images/favicon/favicon.ico"/>
+    <script type="application/javascript" src="../js/validationRepairForm.js"></script>
+    <script type="application/javascript" src="../js/validationCommon.js"></script>
     <title>Serwis samochodowy - dodanie naprawy</title>
 </head>
 <body>
@@ -16,7 +18,7 @@
     <nav>
         <ul>
             <li><a href="../index.html">Strona główna</a></li>
-            <li><a href="/pages/mechanics-list.html">Lista mechaników</a></li>
+            <li><a href="../pages/mechanics-list.html">Lista mechaników</a></li>
             <li><a href="../pages/cars-list.html">Lista pojazdów</a></li>
             <li><a href="../pages/repair-list.html" class="active">Naprawy</a></li>
         </ul>
@@ -25,29 +27,35 @@
         <h2>
             Dodaj nową naprawę
         </h2>
-    <form class="form">   
+        <form class="form" novalidate onsubmit="return validateForm();">   
 
         <label for="damage">Opis uszkodzenia: <abbr title="required" aria-label="required">*</abbr></label>
-        <input type="text" name="damage" id="damage">
+        <input type="text" name="damage" id="damage" placeholder="10-300 znaków"/>
+        <span id="errorRepairDamage" class="errors-text"></span>
 
 
         <label for="date">Data: <abbr title="required" aria-label="required">*</abbr></label>
-        <input type="date" name="date" id="date">
+        <input type="date" name="date" id="date"/>
+        <span id="errorRepairDate" class="errors-text"></span>
 
-        <label>Mechanik: <abbr title="required" aria-label="required">*</abbr></label>
+
+        <label>Mechanik:</label>
         <select name="mechanic">
             <option>Kowalski</option>
             <option>Nowak</option>
         </select>
+        <span class="errors-text"></span>
 
 
-        <label>Wybierz pojazd (Rejestracja): <abbr title="required" aria-label="required">*</abbr></label>
+        <label>Wybierz pojazd (Rejestracja):</label>
         <select name="car">
             <option>WY 13920</option>
             <option>WGM 20139</option>
         </select>
+        <span class="errors-text"></span>
 
     <div class="form-buttons">
+    <p id="errorsSummary" class="errors-text"></p>
     <input type="submit" value="Dodaj" class="form-button-submit form-buttons"/>
     <a href="../pages/repair-list.html" class="form-button-cancel">Anuluj</a>  
     </div>

@@ -2,21 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="../images/favicon/favicon.ico"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rajdhani">
+    <script type="application/javascript" src="../js/validationCarForm.js"></script>
+    <script type="application/javascript" src="../js/validationCommon.js"></script>
     <title>Serwis samochodowy - informacje o pojeździe</title>
 </head>
 <body>
     <header>
-        <link rel="stylesheet" href="../css/style.css" />
         <h1>Serwis samochodowy u Stanisława</h1>
         <img src="/images/logo.png" alt="Logo firmy" width="200" height="200">
     </header>
     <nav>
         <ul>
             <li><a href="../index.html">Strona główna</a></li>
-            <li><a href="/pages/mechanics-list.html">Lista mechaników</a></li>
+            <li><a href="../pages/mechanics-list.html">Lista mechaników</a></li>
             <li><a href="../pages/cars-list.html" class="active">Lista pojazdów</a></li>
             <li><a href="../pages/repair-list.html">Naprawy</a></li>
         </ul>
@@ -25,15 +27,21 @@
         <h2>
             Szczegóły o pojeździe
         </h2>
-    <form class="form">         
-        <label for="name" class="bold-txt">Marka: </label>
-        <input type="text" name="name" value="Alfa Romeo" id="name" disabled />
+        <form class="form" novalidate onsubmit="return validateForm();">   
+
+        <label for="carName" class="bold-txt">Marka: </label>
+        <input type="text" name="carName" value="Alfa Romeo" id="carName" disabled />
+        <span id="errorCarName" class="errors-text"></span>
 
         <label for="idr" class="bold-txt">Rejestracja: </label>
         <input type="text" name="idr" value="WY 13920" id="idr" disabled />
+        <span id="errorCarIdr" class="errors-text"></span>
 
         <label for="mileage" class="bold-txt">Przebieg: </label>
         <input type="text" name="mileage" value="192564 km" id="mileage" disabled />
+        <span id="errorCarMileage" class="errors-text"></span>
+
+
     </form>
     <a href="../pages/car-edit.html" class="list-actions-button-edit">Edytuj</a>  
     <h2>
@@ -66,7 +74,6 @@
                 <td>900 zł</td>
             
             </tr>
-            <!-- Tu wstaw dodatkowe wiersze -->
         </tbody>
         </table>
 

@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="../images/favicon/favicon.ico"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rajdhani">
+    <script type="application/javascript" src="../js/validationCarForm.js"></script>
+    <script type="application/javascript" src="../js/validationCommon.js"></script>
     <title>Serwis samochodowy - zmiana danych</title>
 </head>
 <body>
@@ -16,7 +18,7 @@
     <nav>
         <ul>
             <li><a href="../index.html">Strona główna</a></li>
-            <li><a href="/pages/mechanics-list.html">Lista mechaników</a></li>
+            <li><a href="../pages/mechanics-list.html">Lista mechaników</a></li>
             <li><a href="../pages/cars-list.html" class="active">Lista pojazdów</a></li>
             <li><a href="../pages/repair-list.html">Naprawy</a></li>
         </ul>
@@ -26,21 +28,28 @@
             Aktualizuj dane
         </h2>
 
-    <form class="form">        
-        <label for="name">Marka: <abbr title="required" aria-label="required">*</abbr></label>
-        <input type="text" name="name" value="Alfa Romeo" id="name">
+        <form class="form" novalidate onsubmit="return validateForm();">        
+        <label for="carName">Marka: <abbr title="required" aria-label="required">*</abbr></label>
+        <input type="text" name="carName" value="Alfa Romeo" id="carName" placeholder="2-20 znaków"/>
+        <span id="errorCarName" class="errors-text"></span>
+
         <label for="idr">Rejestracja: <abbr title="required" aria-label="required">*</abbr></label>
-        <input type="text" name="idr" value="WY 13920" id="idr">
+        <input type="text" name="idr" value="WY 13920" id="idr" placeholder="do 10 znaków"/>
+        <span id="errorCarIdr" class="errors-text"></span>
+
         <label for="mileage">Przebieg: <abbr title="required" aria-label="required">*</abbr></label>
         <input type="number" name="mileage" value="192564" id="mileage">
+        <span id="errorCarMileage" class="errors-text"></span>
 
         <label for="km_mil">Jednostka:</label>
         <select name="km_mil" id="km_mil">
         <option value="km" selected>Kilometry</option>
         <option value="mil">Mile</option>
         </select>
+        <span class="errors-text"></span>
 
     <div class="form-buttons">
+    <p id="errorsSummary" class="errors-text"></p>
     <input type="submit" value="Aktualizuj" class="form-button-submit"/>
     <a href="../pages/car-info.html" class="form-button-cancel">Anuluj</a>  
     </div>
