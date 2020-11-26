@@ -1,0 +1,46 @@
+<%- include('../header.ejs') %>
+
+
+    <script type="application/javascript" src="/js/validationCarForm.js"></script>
+    <script type="application/javascript" src="/js/validationCommon.js"></script>
+    <main>
+        <h2>
+            Aktualizuj dane
+        </h2>
+
+        <form class="form" novalidate onsubmit="return validateForm();">        
+        <label for="carName">Marka: <abbr title="required" aria-label="required">*</abbr></label>
+        <input type="text" name="carName" value="Alfa Romeo" id="carName" placeholder="2-20 znaków"/>
+        <span id="errorCarName" class="errors-text"></span>
+
+        <label for="idr">Rejestracja: <abbr title="required" aria-label="required">*</abbr></label>
+        <input type="text" name="idr" value="WY 13920" id="idr" placeholder="do 10 znaków"/>
+        <span id="errorCarIdr" class="errors-text"></span>
+
+        <label for="mileage">Przebieg: <abbr title="required" aria-label="required">*</abbr></label>
+        <input type="number" name="mileage" value="192564" id="mileage">
+        <span id="errorCarMileage" class="errors-text"></span>
+
+        <label for="km_mil">Jednostka:</label>
+        <select name="km_mil" id="km_mil">
+        <option value="km" selected>Kilometry</option>
+        <option value="mil">Mile</option>
+        </select>
+        <span class="errors-text"></span>
+
+    <div class="form-buttons">
+    <p id="errorsSummary" class="errors-text"></p>
+    <input type="submit" value="Aktualizuj" class="form-button-submit"/>
+    <a href="/car" class="form-button-cancel">Anuluj</a>  
+    </div>
+    </form>
+
+
+</main>
+    <footer>
+        Krzysztof Baka, s16696
+    </footer>
+
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+<%- include('../header.ejs') %>
+    <main>
+        <h2>
+            Szczegóły o mechaniku
+        </h2>
+        <form class="form" novalidate onsubmit="return validateForm();">          
+        <label for="lastname" class="bold-txt">Nazwisko: </label>
+        <input type="text" name="lastname" value="Kowalski" id="lastname" disabled />
+        <span id="errorLastName" class="errors-text"></span>
+
+        <label for="firstname" class="bold-txt">Imie: </label>
+        <input type="text" name="firstname" value="Stefan" id="firstname" disabled />
+        <span id="errorFirstName" class="errors-text"></span>
+
+        <label for="exp" class="bold-txt">Doświadczenie: </label>
+        <input type="text" name="exp" value="Certyfikat AutoKasacja 2013" id="exp" disabled />
+        <span id="errorExp" class="errors-text"></span>
+
+    </form>
+    <a href="/mechanics/edit/:1" class="list-actions-button-edit">Edytuj</a>  
+    <h2>
+        Lista wykonanych napraw:
+    </h2>
+
+    <table class="table-list">
+        <thead>
+            <tr>
+                <th>Opis Uszkodzenia</th>
+                <th>Rejestracja pojazdu</th>
+                <th>Przebieg</th>
+                <th>Data naprawy</th>
+                <th>Koszt naprawy</th>
+            </tr>
+        </thead>
+        
+    
+        <tbody>
+            <tr>
+                <td>Uszkodzona chłodnica</td>
+                <td>WY 13920</td>
+                <td>204890</td>
+                <td>2020-10-24</td>
+                <td>1760 zł</td>
+            
+            </tr>
+            <tr>
+                <td>Uszkodzony zderzak</td>
+                <td>WPR S15KL</td>
+                <td>15032</td>
+                <td>2020-10-24</td>
+                <td>900 zł</td>
+            
+            </tr>
+            <!-- Tu wstaw dodatkowe wiersze -->
+        </tbody>
+        </table>
+
+        <a href="/mechanics" class="list-actions-button-details form-buttons">Powrót</a>  
+
+
+</main>
+<footer>
+    Krzysztof Baka, s16696
+</footer>
+
+
+</body>
+</html>

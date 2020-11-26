@@ -1,0 +1,394 @@
+html {
+    background-color: #ecf0f1;
+    font-family: sans-serif;
+}
+body {
+    min-width: 360px;
+}
+
+/* Kolor tła */
+header, 
+main, 
+footer {
+    background-color: rgba(255, 255, 255, 0.445);
+}
+
+/* Marginesy */
+header,
+main,
+footer,
+nav {
+    margin: 0.8rem;
+}
+
+/* Formatowanie dla nagłówka i stopki */
+header, 
+footer {
+    background-color: #af1414;
+    color: white;
+    font-family: "Rajdhani";
+    padding: 1.0rem;
+
+}
+
+/* overflow: auto zapobiegnie ‘zapadnięciu’ 
+się nagłówka po użyciu właściwości float przy rozkładzie elementów h1 oraz img
+Update: zmiana na flex*/
+header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 22px;
+}
+
+/* zmienia belki nawigacyjnej */
+
+nav {
+    font-family: "Rajdhani";
+    font-weight: bold;
+    font-size: 18px;
+    background-color: #e77b7b9f;
+}
+
+nav ul {
+    padding: 0;
+    overflow: hidden;
+    list-style-type: none;
+}
+
+nav ul {
+    display: flex;
+    padding: 0;
+    list-style-type: none;
+}
+
+nav ul li a {
+    display: inline-block;
+    color: #2c3e50;
+    padding: 1rem 2rem;
+    text-decoration: none;
+}
+
+/* Ustawienie zachowania po najechaniu na element menu: */
+nav ul li a:hover {
+    background-color: #e68507dc;
+    color: #ecf0f1;
+}
+
+/* Stworzenie klasy do oznaczenia elementu menu, który jest aktualnie wybrany */
+nav ul li a.active {
+    background-color: #d6170ac5;
+    color: #ecf0f1;
+}
+
+/* Ustawienie dopełnienia aby odsunąć zawartość od obramowania: */
+main {
+    padding: 1.5rem;
+}
+
+footer {
+    text-align: center;
+}
+
+main h2 {
+    font-family: "Rajdhani";
+    font-size: 30px;
+    border-bottom: 1px solid #c70707;
+    margin-bottom: 2rem;
+}
+
+
+/* tabela rozciagniecie tabeli*/
+.table-list {
+    border-collapse: collapse;
+    color:#2c3e50;
+    width: 100%;
+}
+
+/*obramowanie tabeli*/
+.table-list,
+.table-list th,
+.table-list td {
+    border: 1px solid #ecf0f1;
+}
+
+/*odsunięcie obramowania*/
+.table-list th,
+.table-list td {
+    padding: 0.5rem;
+}
+
+/*ustawienie tła nagłowka i naprzemiennych wierszy */
+.table-list th,
+.table-list tbody tr:nth-child(even) {
+    background-color: #ecf0f1;
+}
+
+.list-actions {
+    margin: 0;
+    text-align: center;
+    list-style-type: none;
+    padding: 0;
+}
+
+.list-actions li {
+    display: inline-block;
+}
+
+.list-actions-button-details,
+.list-actions-button-edit,
+.list-actions-button-delete {
+    transition-duration: 0.4s;
+    display: inline-block;
+    width: 75px;
+    padding: 0.30rem 0.5rem;
+    margin-right: 1rem;
+}
+
+
+
+/*details*/
+.list-actions-button-details {
+  /*  background-color: #2980b9;  */
+    background-color: #4cae4f;      
+    
+}
+.list-actions-button-details:hover {
+   /* background-color: #3498db;*/
+   background-color: #428644;
+   color: white;
+}
+
+/*edit*/
+.list-actions-button-edit {
+    background-color: #f39c12;
+}
+
+.list-actions-button-edit:hover {
+    background-color: #f1c40f;
+}
+
+/*delete*/
+.list-actions-button-delete {
+    background-color: #c0392b;
+}
+
+.list-actions-button-delete:hover {
+    background-color: #e74c3c;
+}
+
+/* add button */
+.list-actions-button-details,
+.list-actions-button-edit,
+.list-actions-button-delete,
+.button-add,
+.form-button-submit,
+.form-button-cancel {
+    border: none;
+    border-radius: 5px;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    font-size: 0.8rem;
+}
+
+
+.button-add,
+.form-button-submit,
+.form-button-cancel {
+    padding: 0.5rem 1rem;
+}
+
+.button-add,
+.form-button-submit
+{
+    transition-duration: 0.4s;
+    background-color: #27ae60;
+}
+
+.button-add:hover,
+.form-button-submit:hover
+{
+    background-color: #2ecc71;
+}
+
+/* add mechanic form */
+button, 
+input, 
+select, 
+textarea { 
+    font-family: inherit; 
+    font-size: 100%; 
+    box-sizing: border-box; 
+    padding: 0; margin: 0; 
+} 
+
+textarea { 
+    overflow: auto; 
+}
+
+/*
+.form {
+    margin-left: 2rem;
+    width: 300px;
+}
+*/
+
+.form-buttons{
+    grid-column-start: 1; 
+    grid-column-end: -1;
+    grid-column: 1 / span 2;
+}
+
+/*
+.form {
+    display: grid;
+    grid-template-columns: 150px 300px;
+    row-gap: 1rem;
+    column-gap: 1rem;
+    grid-column: 1/ span 2;
+}
+*/
+
+.form {
+    
+    display: grid;
+    grid-template-columns: 150px 300px 1fr;
+    column-gap: 1rem;
+    row-gap: 1rem;
+}
+
+.form select, 
+.form input[type="text"],
+.form input[type="number"],
+.form input[type="date"],
+.form input[type="email"] {
+    border: 1px solid #7f8c8d;
+    color:#2c3e50;
+    border-radius: 5px;
+    padding: 0.5rem;
+    width: 100%;
+}
+
+.form label {
+    display: block;
+    margin-bottom: 0.5em;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.bold-txt{
+    font-weight: bold;
+}
+
+/*
+abbr[title='required'] {
+    color: #c0392b;
+}
+*/
+
+.form-buttons{
+    margin-top: 2rem;
+}
+
+.form-button-cancel,
+.list-actions-button-delete {
+    background-color: #c0392b;
+}
+
+.form-button-cancel:hover,
+.list-actions-button-delete:hover {
+    background-color: #e74c3c;
+}
+
+.form-button-submit,
+.form-button-cancel {
+    width: 100%;
+}
+
+.form-button-cancel {
+    box-sizing: border-box;
+    display: block;
+}
+
+.form-button-submit {
+    margin-bottom: 0.5rem;
+}
+
+
+
+.form input.error-input,
+.form select.error-input {
+  border: 3px solid #e74c3c
+}
+
+.errors-text,
+abbr[title='required'] {
+    color: #c0392b;
+    font-size: 0.85em;
+    line-height: 2.25rem;
+    font-weight: bold;
+}
+
+
+@media all and (max-width:720px) {
+    header {
+        flex-direction: column;
+    }
+
+    header h1 {
+        text-align: center;
+    } 
+
+    header img {
+        align-self: center;
+    }
+
+    nav ul {
+        flex-wrap: wrap;
+    }
+
+    nav ul li {
+        flex-basis: 50%;
+        text-align: center;
+    }
+
+    nav ul li a {
+        display: block;
+    }
+
+    .form {
+        grid-template-columns: 1fr;
+        row-gap:unset;
+        margin-left: unset;
+    }
+
+    .form .errors-text {
+        margin-bottom: 1rem;
+    }
+/*
+    .form input[type="text"],
+    .form input[type="number"],
+    .form input[type="date"],
+    .form select {
+        margin-bottom: 1rem;
+    }
+    */
+
+}
+
+@media all and (max-width: 400px) {
+    body, 
+    nav, 
+    nav ul, 
+    header, 
+    main, 
+    footer {
+        margin: 0;
+    }
+
+    nav ul li {
+        flex-basis: 100%;
+    }
+}

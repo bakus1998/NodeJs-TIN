@@ -1,0 +1,59 @@
+<%- include('../header.ejs') %>
+    <main>
+        <h2>Lista pracowników</h2>
+    <table class="table-list">
+    <thead>
+        <tr>
+            <th>Nazwisko</th>
+            <th>Imie</th>
+            <th>Doświadczenie</th>
+            <th>Akcje</th>
+        </tr>
+    </thead>
+    
+
+    <tbody>
+        <tr>
+            <td>Kowalski</td>
+            <td>Stefan</td>
+            <td>Certyfikat AutoKasacja 2013</td>
+            <td>
+                <ul class="list-actions">
+                    <li>
+                        <a href="/mechanics/details/:1" class="list-actions-button-details">Szczegóły</a>
+                    </li>
+                    <li>
+                        <a href="/mechanics/edit/:1" class="list-actions-button-edit">Edytuj</a>
+                    </li>
+                    <li>
+                        <a href="" class="list-actions-button-delete">Usuń</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>Nowak</td>
+            <td>Stanisław</td>
+            <td>Doświadczenie w naprawianiu bulbulatorów</td>
+            <td>
+                <ul class="list-actions">
+                    <li>
+                        <a href="/pages/mechanic-info.html" class="list-actions-button-details">Szczegóły</a>
+                    </li>
+                    <li>
+                        <a href="" class="list-actions-button-edit">Edytuj</a>
+                    </li>
+                    <li>
+                        <a href="" class="list-actions-button-delete">Usuń</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+        <!-- Tu wstaw dodatkowe wiersze -->
+    </tbody>
+    </table>
+
+    <p><a href="/mechanics/add" class="button-add">Dodaj nowego mechanika</a></p>
+</main>
+
+<%- include('../footer.ejs') %>

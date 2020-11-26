@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="icon" type="image/png" href="./images/favicon/favicon.ico"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rajdhani">
+    <title>Serwis samochodowy</title>
+</head>
+<body>
+    <header>
+        <h1>Serwis samochodowy u Stanisława</h1>
+        <img src="/images/logo.png" alt="Logo firmy" width="200" height="200">
+    </header>
+    <nav>
+        <ul>
+            <li><a href="/" class="<%= navLocation == 'main' ? 'active' : ''%>">Strona główna</a></li>
+            <li><a href="/mechanics" class="<%= navLocation == 'mechanic' ? 'active' : ''%>">Lista mechaników</a></li>
+            <li><a href="/car" class="<%= navLocation == 'car' ? 'active' : ''%>">Lista pojazdów</a></li>
+            <li><a href="/pages/repair-list.html">Naprawy</a></li>
+        </ul>
+    </nav>

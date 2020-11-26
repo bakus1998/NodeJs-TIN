@@ -1,0 +1,64 @@
+<%- include('../header.ejs') %>
+    <main>
+        <h2>
+            Szczegóły o pojeździe
+        </h2>
+        <form class="form" novalidate onsubmit="return validateForm();">   
+
+        <label for="carName" class="bold-txt">Marka: </label>
+        <input type="text" name="carName" value="Alfa Romeo" id="carName" disabled />
+        <span id="errorCarName" class="errors-text"></span>
+
+        <label for="idr" class="bold-txt">Rejestracja: </label>
+        <input type="text" name="idr" value="WY 13920" id="idr" disabled />
+        <span id="errorCarIdr" class="errors-text"></span>
+
+        <label for="mileage" class="bold-txt">Przebieg: </label>
+        <input type="text" name="mileage" value="192564 km" id="mileage" disabled />
+        <span id="errorCarMileage" class="errors-text"></span>
+
+
+    </form>
+    <a href="/car/edit/:1" class="list-actions-button-edit">Edytuj</a>  
+    <h2>
+        Lista napraw wykonanych w tym pojeździe:
+    </h2>
+
+    <table class="table-list">
+        <thead>
+            <tr>
+                <th>Opis Uszkodzenia</th>
+                <th>Przebieg</th>
+                <th>Data naprawy</th>
+                <th>Koszt naprawy</th>
+            </tr>
+        </thead>
+    
+        <tbody>
+            <tr>
+                <td>Uszkodzona chłodnica</td>
+                <td>204890 km</td>
+                <td>2020-10-24</td>
+                <td>1760 zł</td>
+            
+            </tr>
+            <tr>
+                <td>Uszkodzony zderzak</td>
+                <td>15032 mil</td>
+                <td>2020-10-24</td>
+                <td>900 zł</td>
+            
+            </tr>
+        </tbody>
+        </table>
+
+        <a href="/car" class="list-actions-button-details form-buttons">Powrót</a>  
+
+</main>
+<footer>
+    Krzysztof Baka, s16696
+</footer>
+
+
+</body>
+</html>
