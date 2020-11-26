@@ -1,26 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/style.css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rajdhani">
-    <link rel="icon" type="image/png" href="../images/favicon/favicon.ico"/>
-    <title>Serwis samochodowy - informacje o mechaniku</title>
-</head>
-<body>
-    <header>
-        <h1>Serwis samochodowy u Stanisława</h1>
-        <img src="/images/logo.png" alt="Logo firmy" width="200" height="200">
-    </header>
-    <nav>
-        <ul>
-            <li><a href="../index.html">Strona główna</a></li>
-            <li><a href="../pages/mechanics-list.html">Lista mechaników</a></li>
-            <li><a href="../pages/cars-list.html">Lista pojazdów</a></li>
-            <li><a href="../pages/repair-list.html" class="active">Naprawy</a></li>
-        </ul>
-    </nav>
+<%- include('../header.ejs') %>
     <main>
     <h2>
         Lista wykonanych napraw:
@@ -49,10 +27,10 @@
                 <td>
                     <ul class="list-actions">
                         <li>
-                            <a href="../pages/repair-info.html" class="list-actions-button-details">Szczegóły</a>
+                            <a href="/repair/details/:1" class="list-actions-button-details">Szczegóły</a>
                         </li>
                         <li>
-                            <a href="../pages/repair-edit.html" class="list-actions-button-edit">Edytuj</a>
+                            <a href="/repair/edit/:1" class="list-actions-button-edit">Edytuj</a>
                         </li>
                         <li>
                             <a href="" class="list-actions-button-delete">Usuń</a>
@@ -70,7 +48,7 @@
                 <td>
                     <ul class="list-actions">
                         <li>
-                            <a href="../pages/repair-info.html" class="list-actions-button-details">Szczegóły</a>
+                            <a href="" class="list-actions-button-details">Szczegóły</a>
                         </li>
                         <li>
                             <a href="" class="list-actions-button-edit">Edytuj</a>
@@ -85,14 +63,8 @@
         </tbody>
         </table>
 
-        <p><a href="../pages/repair-form.html" class="button-add">Dodaj nową naprawę</a></p>
+        <p><a href="/repair/add" class="button-add">Dodaj nową naprawę</a></p>
 
 
 </main>
-<footer>
-    Krzysztof Baka, s16696
-</footer>
-
-
-</body>
-</html>
+<%- include('../footer.ejs') %>

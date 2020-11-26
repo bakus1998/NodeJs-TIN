@@ -1,28 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/style.css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rajdhani">
-    <link rel="icon" type="image/png" href="../images/favicon/favicon.ico"/>
-    <script type="application/javascript" src="../js/validationRepairForm.js"></script>
-    <script type="application/javascript" src="../js/validationCommon.js"></script>
-    <title>Serwis samochodowy - dodanie naprawy</title>
-</head>
-<body>
-    <header>
-        <h1>Serwis samochodowy u Stanisława</h1>
-        <img src="/images/logo.png" alt="Logo firmy" width="200" height="200">
-    </header>
-    <nav>
-        <ul>
-            <li><a href="../index.html">Strona główna</a></li>
-            <li><a href="../pages/mechanics-list.html">Lista mechaników</a></li>
-            <li><a href="../pages/cars-list.html">Lista pojazdów</a></li>
-            <li><a href="../pages/repair-list.html" class="active">Naprawy</a></li>
-        </ul>
-    </nav>
+<%- include('../header.ejs') %>
+    <script type="application/javascript" src="/js/validationRepairForm.js"></script>
+    <script type="application/javascript" src="/js/validationCommon.js"></script>
     <main>
         <h2>
             Dodaj nową naprawę
@@ -57,15 +35,9 @@
     <div class="form-buttons">
     <p id="errorsSummary" class="errors-text"></p>
     <input type="submit" value="Dodaj" class="form-button-submit form-buttons"/>
-    <a href="../pages/repair-list.html" class="form-button-cancel">Anuluj</a>  
+    <a href="/repair" class="form-button-cancel">Anuluj</a>  
     </div>
 </form>
 
 </main>
-    <footer>
-        Krzysztof Baka, s16696
-    </footer>
-
-
-</body>
-</html>
+<%- include('../footer.ejs') %>
