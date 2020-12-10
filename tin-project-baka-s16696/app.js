@@ -8,6 +8,7 @@ var indexRouter = require('./routes/index');
 const mechanicRouter = require('./routes/mechanicRoute');
 const carRouter = require('./routes/carRoute');
 const repairRouter = require('./routes/repairRoute');
+const mechanicApiRouter = require('./routes/api/MechanicApiRoute');
 
 var app = express();
 
@@ -23,6 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/mechanics',mechanicRouter);
+app.use('/api/mechanics',mechanicApiRouter);
 app.use('/car', carRouter);
 app.use('/repair',repairRouter);
 

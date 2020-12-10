@@ -3,14 +3,16 @@ function validateForm() {
 
     const RepairDamage = document.getElementById('damage');
     const RepairDate = document.getElementById('date');
+    const RepairPrice = document.getElementById('price');
 
     const errorsSummary = document.getElementById('errorsSummary');
 
     const errorRepairDamage = document.getElementById('errorRepairDamage');
     const errorRepairDate = document.getElementById('errorRepairDate');
+    const errorRepairPrice = document.getElementById('errorRepairPrice');
 
 
-    resetErrors([RepairDamage,RepairDate],[errorRepairDamage,errorRepairDate],errorsSummary);
+    resetErrors([RepairDamage,RepairDate,RepairPrice],[errorRepairDamage,errorRepairDate,errorRepairPrice],errorsSummary);
 
     let valid = true;
 
@@ -49,7 +51,16 @@ function validateForm() {
         RepairDate.classList.add("error-input");
         errorRepairDate.innerText = "Data nie może być z przyszłości";
     }
-    
+
+    if (!checkRequired(RepairPrice.value)) {
+        valid = false;
+        RepairPrice.classList.add("error-input");
+        errorRepairPrice.innerText = "Pole jest wymagane";
+    }else if(RepairPrice.value<0){
+        valid = false;
+        RepairPrice.classList.add("error-input");
+        errorRepairPrice.innerText = "Podana wartość nie może być ujemna!";
+    }
 
     if (!valid) {
         errorsSummary.innerText = "Formularz zawiera błędy";
