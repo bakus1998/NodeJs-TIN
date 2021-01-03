@@ -1,25 +1,23 @@
 <%- include('../header.ejs') %>
     <main>
-        <h2>
-            Dodaj nowego mechanika
-        </h2>
+        <h2><%= pageTitle %></h2>
 
         <script type="application/javascript" src="/js/validationEmpForm.js"></script>
         <script type="application/javascript" src="/js/validationCommon.js"></script>
         
-        <form class="form" novalidate onsubmit="return validateForm();">
+        <form class="form" method="POST" action="<%=formAction%>" ovalidate onsubmit="return validateForm();">
             <label for="lastname">Nazwisko:<abbr title="required" aria-label="required">*</abbr></label>
-            <input type="text" name="lastname" id="lastname" placeholder="2-60 znaków"/>
+            <input type="text" name="Nazwisko" id="lastname" placeholder="2-60 znaków" />
             <span id="errorLastName" class="errors-text"></span>
         
 
         <label for="firstname">Imię:<abbr title="required" aria-label="required">*</abbr></label>
-        <input type="text" name="firstname" id="firstname" placeholder="2-60 znaków" />
+        <input type="text" name="Imie" id="firstname" placeholder="2-60 znaków" />
         <span id="errorFirstName" class="errors-text"></span>
 
 
         <label for="exp">Doświadczenie:<abbr title="required" aria-label="required">*</abbr></label>
-        <input type="text" name="exp" id="exp" placeholder="do 100 znaków" />
+        <input type="text" name="Doswiadczenie" id="exp" placeholder="do 100 znaków" />
         <span id="errorExp" class="errors-text"></span>
     
     <div class="form-buttons">

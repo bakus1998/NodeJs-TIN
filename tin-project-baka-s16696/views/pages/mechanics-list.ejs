@@ -12,7 +12,7 @@
     </thead>
     
 
-    <tbody>
+    <!-- <tbody>
         <tr>
             <td>Kowalski</td>
             <td>Stefan</td>
@@ -50,8 +50,28 @@
             </td>
         </tr>
         
-        <!-- Tu wstaw dodatkowe wiersze -->
+    </tbody> -->
+
+
+    <tbody>
+        <% for (let emp of emps) { %>
+            <tr>
+                <td><%= emp.Nazwisko %></td>
+                <td><%= emp.Imie %></td>
+                <td><%= emp.Doswiadczenie %></td>
+                <td>
+                    <ul class="list-actions">
+                        <li><a href="/mechanics/details/<%=emp.id_mechanik%>" class="list-actions-button-details">Szczegóły</a></li>
+                        <li><a href="/mechanics/edit/<%=emp.id_mechanik%>" class="list-actions-button-edit">Edytuj</a></li>
+                        <li><a href="/mechanics/delete/<%=emp.id_mechanik%>" class="list-actions-button-delete">Usuń</a></li>
+                    </ul>
+                </td>
+            </tr>
+        <% } %>
+
     </tbody>
+
+
     </table>
 
     <p><a href="/mechanics/add" class="button-add">Dodaj nowego mechanika</a></p>

@@ -48,7 +48,15 @@ return db.promise().query(query, [mechanicId])
         if(!firstRow) {
             return db.promise().query(queryWithoutNaprawa, [mechanicId])
             .then( (results2, fields) => {
-                return results2[0][0];
+                const mechanic = {
+                    id_mechanic: parseInt(mechanicId),
+                    Imie: results2[0][0].Imie,
+                    Nazwisko: results2[0][0].Nazwisko,
+                    Doswiadczenie: results2[0][0].Doswiadczenie,
+                    naprawy: []
+                }
+
+                return mechanic;
             
             }).catch(err => {
         console.log(err);

@@ -1,59 +1,59 @@
 <%- include('../header.ejs') %>
     <main>
-        <h2>
-            Szczegóły o mechaniku
-        </h2>
-        <form class="form" novalidate onsubmit="return validateForm();">          
+        <h2><%= pageTitle %></h2>
+        <form class="form" novalidate onsubmit="return validateForm();">   
+     
+       
         <label for="lastname" class="bold-txt">Nazwisko: </label>
-        <input type="text" name="lastname" value="Kowalski" id="lastname" disabled />
+        <input type="text" name="Nazwisko" value="<%= emp.Nazwisko %>" id="lastname" disabled />
         <span id="errorLastName" class="errors-text"></span>
 
         <label for="firstname" class="bold-txt">Imie: </label>
-        <input type="text" name="firstname" value="Stefan" id="firstname" disabled />
+        <input type="text" name="firstname" value="<%= emp.Imie %>" id="firstname" disabled />
         <span id="errorFirstName" class="errors-text"></span>
 
         <label for="exp" class="bold-txt">Doświadczenie: </label>
-        <input type="text" name="exp" value="Certyfikat AutoKasacja 2013" id="exp" disabled />
+        <input type="text" name="exp" value="<%= emp.Doswiadczenie %>" id="exp" disabled />
         <span id="errorExp" class="errors-text"></span>
 
     </form>
-    <a href="/mechanics/edit/:1" class="list-actions-button-edit">Edytuj</a>  
+    <a href="/mechanics/edit/<%= emp.id_mechanic %>" class="list-actions-button-edit">Edytuj</a>  
     <h2>
         Lista wykonanych napraw:
     </h2>
 
-    <table class="table-list">
-        <thead>
-            <tr>
-                <th>Opis Uszkodzenia</th>
-                <th>Rejestracja pojazdu</th>
-                <th>Przebieg</th>
-                <th>Data naprawy</th>
-                <th>Koszt naprawy</th>
-            </tr>
-        </thead>
+    <%if (emp.naprawy.length > 0) { %>
+        <table class="table-list">
+            <thead>
+                <tr>
+                    <th>Opis Uszkodzenia</th>
+                    <th>Rejestracja pojazdu</th>
+                    <th>Przebieg</th>
+                    <th>Data naprawy</th>
+                    <th>Koszt naprawy</th>
+                </tr>
+            </thead>
+            
         
+            <tbody>
     
-        <tbody>
-            <tr>
-                <td>Uszkodzona chłodnica</td>
-                <td>WY 13920</td>
-                <td>204890 km</td>
-                <td>2020-10-24</td>
-                <td>1760 zł</td>
-            
-            </tr>
-            <tr>
-                <td>Uszkodzony zderzak</td>
-                <td>WPR S15KL</td>
-                <td>15032 km</td>
-                <td>2020-10-24</td>
-                <td>900 zł</td>
-            
-            </tr>
-            <!-- Tu wstaw dodatkowe wiersze -->
-        </tbody>
-        </table>
+                <% for (let e of emp.naprawy) { %>
+                    <tr>
+                        <td><%= e.OpisUszkodzenia %></td>
+                        <td><%= e.Pojazd.Tablica_Rejestracyjna %></td>
+                        <td><%= e.Pojazd.Przebieg %></td>
+                        <!-- <td><%= e.DataNaprawy %></td> -->
+                        <td><%= e.DataNaprawy.toISOString().split('T')[0] %></td>
+                        <td><%= e.KosztNaprawy %></td>
+                    </tr>
+                <% } %>
+            </tbody>
+            </table>
+            <% } else{ %>  
+                <h3>Brak napraw</h3>
+             <% } %>
+    
+
 
         <a href="/mechanics" class="list-actions-button-details form-buttons">Powrót</a>  
 
