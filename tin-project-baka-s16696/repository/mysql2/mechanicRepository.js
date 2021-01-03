@@ -13,7 +13,6 @@ exports.getMechanics = () =>{
 
 
 
-
 exports.deleteMechanic = (mechanicId) =>{
     const sql = 'DELETE FROM Mechanik WHERE id_mechanik = ?'
     return db.promise().execute(sql, [mechanicId]);
@@ -89,7 +88,7 @@ return db.promise().query(query, [mechanicId])
 }
 
 
-exports.updateEmployee = (mechanicId, MechanicData) => {
+exports.updateMechanic = (mechanicId, MechanicData) => {
     const Imie = MechanicData.Imie;
     const Nazwisko = MechanicData.Nazwisko;
     const Doswiadczenie = MechanicData.Doswiadczenie;

@@ -8,7 +8,10 @@ var indexRouter = require('./routes/index');
 const mechanicRouter = require('./routes/mechanicRoute');
 const carRouter = require('./routes/carRoute');
 const repairRouter = require('./routes/repairRoute');
+
 const mechanicApiRouter = require('./routes/api/MechanicApiRoute');
+const carApiRouter = require('./routes/api/CarApiRoute');
+const repairApiRouter = require('./routes/api/RepairApiRoute');
 
 var app = express();
 
@@ -24,9 +27,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/mechanics',mechanicRouter);
-app.use('/api/mechanics',mechanicApiRouter);
 app.use('/car', carRouter);
 app.use('/repair',repairRouter);
+
+//api
+app.use('/api/mechanics',mechanicApiRouter);
+app.use('/api/car', carApiRouter);
+app.use('/api/repair', repairApiRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,7 +1,7 @@
-const mechanicRepository = require('../repository/mysql2/mechanicRepository');
+const repairRepository = require('../repository/mysql2/repairRepository');
 
-exports.getMechanics = (req, res, next) => {
-    mechanicRepository.getMechanics()
+exports.getRepairs = (req, res, next) => {
+    repairRepository.getRepairs()
         .then(emps => {
             res.status(200).json(emps);
         })
@@ -12,11 +12,11 @@ exports.getMechanics = (req, res, next) => {
 
 
 
-exports.deleteMechanic = (req, res, next) => {
-    const mechanicId = req.params.mechanicId;
-    mechanicRepository.deleteMechanic(mechanicId)
+exports.deleteRepair = (req, res, next) => {
+    const repairId = req.params.repairId;
+    repairRepository.deleteRepair(repairId)
         .then(result => {
-            res.status(200).json({message: 'Removed mechanic', Mechanik: result});
+            res.status(200).json({message: 'Removed repair', Repair: result});
         })
         .catch(err => {
             if (!err.statusCode) {
@@ -29,8 +29,8 @@ exports.deleteMechanic = (req, res, next) => {
 
 
 
-exports.createMechanic = (req, res, next) => {
-    mechanicRepository.createMechanic(req.body)
+exports.createRepair = (req, res, next) => {
+    repairRepository.createRepair(req.body)
         .then(newObj => {
            res.status(201).json(newObj);
         })
@@ -42,13 +42,13 @@ exports.createMechanic = (req, res, next) => {
         });
 };
 
-exports.getMechanicById = (req, res, next) => {
-    const mechanicId = req.params.mechanicId;
-    mechanicRepository.getMechanicById(mechanicId)
+exports.getRepairById = (req, res, next) => {
+    const repairId = req.params.repairId;
+    repairRepository.getRepairById(repairId)
         .then(e => {
             if(!e) {
                 res.status(404).json({
-                    message: 'Mechanic with id: '+mechanicId+' not found'
+                    message: 'Repair id: '+repairId+' not found'
                 })
             } else {
                 res.status(200).json(e);
@@ -57,11 +57,11 @@ exports.getMechanicById = (req, res, next) => {
 };
 
 
-exports.updateMechanic = (req, res, next) => {
-    const mechanicId = req.params.mechanicId;
-    mechanicRepository.updateMechanic(mechanicId, req.body)
+exports.updateRepair = (req, res, next) => {
+    const repairId = req.params.repairId;
+    repairRepository.updateRepair(repairId, req.body)
         .then(result => {
-           res.status(200).json({message: 'Mechanic updated!', mechanic: result});
+           res.status(200).json({message: 'Repair updated!', repair: result});
         })
         .catch(err => {
             if (!err.statusCode) {
