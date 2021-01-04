@@ -94,10 +94,12 @@ return db.promise().query(query, [carId])
             .then( (results2, fields) => {
                 const fRow = results2[0][0];
                 const car = {
-                    id_car: parseInt(carId),
+                    id_Pojazd: parseInt(carId),
                     Marka: fRow.Marka,
-                    Rejestracja: fRow.Tablica_Rejestracyjna,
-                    Przebieg: fRow.Przebieg + fRow.Jednostka_KmMil,
+                    Tablica_Rejestracyjna: fRow.Tablica_Rejestracyjna,
+                    Jednostka_KmMil: fRow.Jednostka_KmMil,
+                    Przebieg: fRow.Przebieg,
+                    naprawy: []
                 }
                 return car;
             
@@ -108,10 +110,11 @@ return db.promise().query(query, [carId])
         }
 
         const car = {
-            id_car: parseInt(carId),
+            id_Pojazd: parseInt(carId),
             Marka: firstRow.Marka,
-            Rejestracja: firstRow.Tablica_Rejestracyjna,
-            Przebieg: firstRow.Przebieg + firstRow.Jednostka_KmMil,
+            Tablica_Rejestracyjna: firstRow.Tablica_Rejestracyjna,
+            Jednostka_KmMil: firstRow.Jednostka_KmMil,
+            Przebieg: firstRow.Przebieg,
             naprawy: []
         }
         for( let i=0; i<results[0].length; i++ ) {

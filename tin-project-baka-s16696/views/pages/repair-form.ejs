@@ -2,38 +2,39 @@
     <script type="application/javascript" src="/js/validationRepairForm.js"></script>
     <script type="application/javascript" src="/js/validationCommon.js"></script>
     <main>
-        <h2>
-            Dodaj nową naprawę
-        </h2>
-        <form class="form" novalidate onsubmit="return validateForm();">   
+        <h2><%= pageTitle %></h2>
+        <form class="form" method="POST" action="<%=formAction%>" novalidate onsubmit="return validateForm();">   
 
         <label for="damage">Opis uszkodzenia: <abbr title="required" aria-label="required">*</abbr></label>
-        <input type="text" name="damage" id="damage" placeholder="10-300 znaków"/>
+        <input type="text" name="OpisUszkodzenia" id="damage" placeholder="10-300 znaków"/>
         <span id="errorRepairDamage" class="errors-text"></span>
 
 
         <label for="date">Data: <abbr title="required" aria-label="required">*</abbr></label>
-        <input type="date" name="date" id="date"/>
+        <input type="date" name="DataNaprawy" id="date"/>
         <span id="errorRepairDate" class="errors-text"></span>
 
         <label for="price">Koszt: <abbr title="required" aria-label="required">*</abbr></label>
-        <input type="number" name="price" id="price">
+        <input type="number" name="KosztNaprawy" id="price">
         <span id="errorRepairPrice" class="errors-text"></span>
 
 
         <label>Mechanik:</label>
-        <select name="mechanic">
-            <option>Kowalski</option>
-            <option>Nowak</option>
+              <select id="mechanik" name="id_mechanik" required <%= (formMode == 'showDetails') ? 'disabled' : ''%> >
+            <% for (let i=0; i<allEmps.length; i++) { let emp = allEmps[i]; %>
+                <option value="<%= emp.id_mechanik %>" label="<%= emp.Nazwisko + ' ' + emp.Imie %>"></option>
+            <% } %>
         </select>
-        <span class="errors-text"></span>
-
+        <span class="errors-text"></span>        
+        
 
         <label>Wybierz pojazd (Rejestracja):</label>
-        <select name="car">
-            <option>WY 13920</option>
-            <option>WGM 20139</option>
+        <select id="pojazd" name="id_Pojazd" required <%= (formMode == 'showDetails') ? 'disabled' : ''%> >
+            <% for (let i=0; i<allDepts.length; i++) { let emp = allDepts[i]; %>
+                <option value="<%= emp.id_Pojazd %>" label="<%= emp.Tablica_Rejestracyjna %>"></option>
+            <% } %>
         </select>
+
         <span class="errors-text"></span>
 
     <div class="form-buttons">

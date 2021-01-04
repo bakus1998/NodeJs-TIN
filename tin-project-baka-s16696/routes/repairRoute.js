@@ -5,7 +5,10 @@ const repairController = require('../controllers/repairController');
 
 router.get('/', repairController.showRepairList);
 router.get('/add',repairController.showRepairForm);
-router.get('/details/:idrepair',repairController.showRepairInfo);
-router.get('/edit/:idrepair',repairController.showRepairEdit);
+router.post('/add',repairController.addRepair);
+router.get('/details/:repairId',repairController.showRepairInfo);
+router.get('/edit/:repairId',repairController.showRepairEdit);
+router.post('/edit',repairController.updateRepairEdit);
+router.get('/delete/:repairId',repairController.deleteRepair);
 
 module.exports=router;

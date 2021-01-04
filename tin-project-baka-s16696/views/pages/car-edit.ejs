@@ -4,27 +4,35 @@
     <script type="application/javascript" src="/js/validationCarForm.js"></script>
     <script type="application/javascript" src="/js/validationCommon.js"></script>
     <main>
-        <h2>
-            Aktualizuj dane
-        </h2>
+        <h2><%= pageTitle %></h2>
 
-        <form class="form" novalidate onsubmit="return validateForm();">        
+        <form class="form" method="POST" action="<%=formAction%>" novalidate onsubmit="return validateForm();">        
         <label for="carName">Marka: <abbr title="required" aria-label="required">*</abbr></label>
-        <input type="text" name="carName" value="Alfa Romeo" id="carName" placeholder="2-20 znaków"/>
+        <input type="text" name="Marka" value="<%= car.Marka %>" id="carName" placeholder="2-20 znaków"/>
         <span id="errorCarName" class="errors-text"></span>
 
         <label for="idr">Rejestracja: <abbr title="required" aria-label="required">*</abbr></label>
-        <input type="text" name="idr" value="WY 13920" id="idr" placeholder="do 10 znaków"/>
+        <input type="text" name="Tablica_Rejestracyjna" value="<%= car.Tablica_Rejestracyjna %>" id="idr" placeholder="do 10 znaków"/>
         <span id="errorCarIdr" class="errors-text"></span>
 
         <label for="mileage">Przebieg: <abbr title="required" aria-label="required">*</abbr></label>
-        <input type="number" name="mileage" value="192564" id="mileage">
+        <input type="number" name="Przebieg" value="<%= car.Przebieg %>" id="mileage">
         <span id="errorCarMileage" class="errors-text"></span>
 
+        <input type="hidden" name="id_Pojazd" value="<%= car.id_Pojazd %>">
+        
         <label for="km_mil">Jednostka:</label>
-        <select name="km_mil" id="km_mil">
-        <option value="km" selected>Kilometry</option>
-        <option value="mil">Mile</option>
+        <select name="Jednostka_KmMil" id="km_mil">
+
+
+            <%if (car.Jednostka_KmMil == "km") { %>
+                <option value="km" selected>Kilometry</option>
+                <option value="mil">Mile</option>
+                <% } else{ %>  
+                    <option value="km">Kilometry</option>
+                    <option value="mil" selected>Mile</option>
+                 <% } %>
+
         </select>
         <span class="errors-text"></span>
 

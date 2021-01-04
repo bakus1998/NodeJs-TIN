@@ -96,6 +96,12 @@ main h2 {
     margin-bottom: 2rem;
 }
 
+main h3 {
+    font-family: "Rajdhani";
+    font-size: 24;
+    color: #af1414;
+}
+
 
 /* tabela rozciagniecie tabeli*/
 .table-list {

@@ -10,9 +10,25 @@
             <th>Akcje</th>
         </tr>
     </thead>
-    
-
     <tbody>
+        <% for (let car of cars) { %>
+            <tr>
+                <td><%= car.Marka %></td>
+                <td><%= car.Tablica_Rejestracyjna %></td>
+                <td><%= car.Przebieg %> <%= car.Jednostka_KmMil %></td>
+                <td>
+                    <ul class="list-actions">
+                        <li><a href="/car/details/<%=car.id_Pojazd%>" class="list-actions-button-details">Szczegóły</a></li>
+                        <li><a href="/car/edit/<%=car.id_Pojazd%>" class="list-actions-button-edit">Edytuj</a></li>
+                        <li><a href="/car/delete/<%=car.id_Pojazd%>" class="list-actions-button-delete">Usuń</a></li>
+                    </ul>
+                </td>
+            </tr>
+        <% } %>
+
+    </tbody>
+
+    <!-- <tbody>
         <tr>
             <td>Alfa Romeo</td>
             <td>WY 13920</td>
@@ -49,8 +65,7 @@
                 </ul>
             </td>
         </tr>
-        <!-- Tu wstaw dodatkowe wiersze -->
-    </tbody>
+    </tbody> -->
     </table>
 
     <p><a href="/car/add" class="button-add">Dodaj nowy pojazd</a></p>

@@ -3,25 +3,23 @@
     <script type="application/javascript" src="/js/validationCarForm.js"></script>
     <script type="application/javascript" src="/js/validationCommon.js"></script>
     <main>
-        <h2>
-            Dodaj nowy pojazd
-        </h2>
+        <h2><%= pageTitle %></h2>
 
-        <form class="form" novalidate onsubmit="return validateForm();">     
+        <form class="form" method="POST" action="<%=formAction%>" novalidate onsubmit="return validateForm();">     
         <label for="carName">Marka: <abbr title="required" aria-label="required">*</abbr></label>
-        <input type="text" name="carName" id="carName" placeholder="2-20 znaków"/>
+        <input type="text" name="Marka" id="carName" placeholder="2-20 znaków"/>
         <span id="errorCarName" class="errors-text"></span>
 
         <label for="idr">Rejestracja: <abbr title="required" aria-label="required">*</abbr></label>
-        <input type="text" name="idr" id="idr" placeholder="do 10 znaków"/>
+        <input type="text" name="Tablica_Rejestracyjna" id="idr" placeholder="do 10 znaków"/>
         <span id="errorCarIdr" class="errors-text"></span>
 
         <label for="mileage">Przebieg: <abbr title="required" aria-label="required">*</abbr></label>
-        <input type="number" name="mileage" id="mileage"/>
+        <input type="number" name="Przebieg" id="mileage"/>
         <span id="errorCarMileage" class="errors-text"></span>
 
         <label for="km_mil">Jednostka:</label>
-        <select name="km_mil" id="km_mil">
+        <select name="Jednostka_KmMil" id="km_mil">
         <option value="km">Kilometry</option>
         <option value="mil">Mile</option>
         </select>

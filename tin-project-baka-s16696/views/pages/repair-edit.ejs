@@ -3,36 +3,46 @@
     <script type="application/javascript" src="/js/validationRepairForm.js"></script>
     <script type="application/javascript" src="/js/validationCommon.js"></script>
     <main>
-        <h2>
-            Aktualizuj dane
-        </h2>
-        <form class="form" novalidate onsubmit="return validateForm();">   
+        <h2><%= pageTitle %></h2>
+        <form class="form" method="POST" action="<%=formAction%>" novalidate onsubmit="return validateForm();">   
 
         <label for="damage">Opis uszkodzenia: <abbr title="required" aria-label="required">*</abbr></label>
-        <input type="text" name="damage" value="Uszkodzona chłodnica" id="damage"/>
+        <input type="text" name="OpisUszkodzenia" value="<%= repairEdit.OpisUszkodzenia %>" id="damage"/>
         <span id="errorRepairDamage" class="errors-text"></span>
 
 
         <label for="date">Data: <abbr title="required" aria-label="required">*</abbr></label>
-        <input type="date" name="date" value="2020-10-24" id="date"/>
+        <input type="date" name="DataNaprawy" value="<%= repairEdit.DataNaprawy.toISOString().split('T')[0]  %>" id="date"/>
         <span id="errorRepairDate" class="errors-text"></span>
 
         <label for="price">Koszt: <abbr title="required" aria-label="required">*</abbr></label>
-        <input type="number" name="price" value="1760" id="price">
+        <input type="number" name="KosztNaprawy" value="<%= repairEdit.KosztNaprawy %>" id="price">
         <span id="errorRepairPrice" class="errors-text"></span>
 
+        <input type="hidden" name="id_Naprawa" value="<%= repairEdit.id_Naprawa %>">
 
         <label>Mechanik: <abbr title="required" aria-label="required">*</abbr></label>
-        <select name="mechanic">
-            <option>Kowalski</option>
-            <option>Nowak</option>
+
+        <select id="mechanic" name="id_mechanik" required <%= (formMode == 'showDetails') ? 'disabled' : ''%> >
+            <option value="" selected>--- Wybierz mechanika ---</option>
+            <% for (let i=0; i<mechanicEdit.length; i++) { let emp = mechanicEdit[i]; %>
+
+                <option value="<%= emp.id_mechanik %>" label="<%= emp.Nazwisko + ' ' + emp.Imie %>"
+                    <%= ( repairEdit.id_Naprawa&& emp.id_mechanik.toString() == repairEdit.Mechanik.id_mechanik.toString()) ? 'selected' : ''%>></option>
+            <% } %>
         </select>
+
         <span class="errors-text"></span>
 
         <label>Wybierz pojazd: <abbr title="required" aria-label="required">*</abbr></label>
-        <select name="idr">
-            <option>WY 13920</option>
-            <option>WGM 20139</option>
+        <select id="pojazd" name="id_Pojazd" required <%= (formMode == 'showDetails') ? 'disabled' : ''%> >
+            <option value="" selected>--- Wybierz pojazd ---</option>
+            <% for (let i=0; i<carEdit.length; i++) { let emp = carEdit[i]; %>
+                <option value="<%= emp.id_Pojazd %>" label="<%= emp.Tablica_Rejestracyjna %>"
+                   
+                    <%= ( repairEdit.id_Naprawa&& emp.id_Pojazd.toString() == repairEdit.Pojazd.id_Pojazd.toString()) ? 'selected' : ''%>
+                    ></option>
+            <% } %>
         </select>
         <span class="errors-text"></span>
 

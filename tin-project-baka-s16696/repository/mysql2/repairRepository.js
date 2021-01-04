@@ -1,7 +1,15 @@
 const db = require('../../config/mysql2/db');
 
 exports.getRepairs = () =>{
-    return db.promise().query('Select * From Naprawa')
+    const query = 
+    `SELECT n.id_Naprawa, n.OpisUszkodzenia, m.Nazwisko, m.Imie, p.Tablica_Rejestracyjna,n.DataNaprawy, n.KosztNaprawy  
+    FROM Naprawa n
+    JOIN Mechanik m
+    ON n.id_mechanik=m.id_mechanik
+    JOIN Pojazd p
+    ON p.id_Pojazd = n.id_Pojazd`
+
+    return db.promise().query(query)
     .then((result, fields) =>{
         console.log(result[0]);
         return result[0];
@@ -41,7 +49,7 @@ exports.updateRepair = (repairId, RepairData) => {
 exports.getRepairById = (repairId) =>{
     const query = 
     `SELECT n.OpisUszkodzenia, n.DataNaprawy, n.KosztNaprawy, m.Nazwisko, p.Tablica_Rejestracyjna, m.Imie, m.Doswiadczenie, 
-    p.Marka, p.Przebieg, p.Jednostka_KmMil 
+    p.Marka, p.Przebieg, p.Jednostka_KmMil, m.id_mechanik, p.id_Pojazd
     FROM Naprawa n 
     JOIN Mechanik m 
     ON m.id_mechanik=n.id_mechanik 
@@ -62,11 +70,13 @@ return db.promise().query(query, [repairId])
             DataNaprawy: firstRow.DataNaprawy,
             KosztNaprawy: firstRow.KosztNaprawy,
             Mechanik: {
+                id_mechanik: firstRow.id_mechanik,
                 Nazwisko: firstRow.Nazwisko,
                 Imie: firstRow.Imie,
                 Doswiadczenie: firstRow.Doswiadczenie
             },
             Pojazd: {
+                id_Pojazd: firstRow.id_Pojazd,
                 Tablica_Rejestracyjna: firstRow.Tablica_Rejestracyjna,
                 Marka: firstRow.Marka,
                 Przebieg: firstRow.Przebieg + firstRow.Jednostka_KmMil

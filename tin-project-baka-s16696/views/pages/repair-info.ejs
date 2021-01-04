@@ -5,29 +5,29 @@
         </h2>
         <form class="form" novalidate onsubmit="return validateForm();">  
         <label for="damage" class="bold-txt">Uszkodzenia: </label>
-        <input type="text" name="damage" value="Uszkodzona chłodnica" id="damage" disabled />
+        <input type="text" name="damage" value="<%= repair.OpisUszkodzenia %>" id="damage" disabled />
         <span id="errorRepairDamage" class="errors-text"></span>
 
         <label for="date" class="bold-txt">Data naprawy: </label>
-        <input type="text" name="date" value="2020-10-24" id="date" disabled />
+        <input type="text" name="date" value="<%= repair.DataNaprawy.toISOString().split('T')[0] %>" id="date" disabled />
         <span id="errorRepairDate" class="errors-text"></span>
 
-        <label for="price" class="bold-txt">Koszt: <abbr title="required" aria-label="required">*</abbr></label>
-        <input type="number" name="price" value="1760" id="price" disabled>
+        <label for="price" class="bold-txt">Koszt: </label>
+        <input type="number" name="price" value="<%= repair.KosztNaprawy %>" id="price" disabled>
         <span id="errorRepairPrice" class="errors-text"></span>
 
         <label for="mechanicname" class="bold-txt">Nazwisko mechanika: </label>
-        <input type="text" name="mechanicname" value="Kowalski" id="mechanicname" disabled />
+        <input type="text" name="mechanicname" value="<%= repair.Mechanik.Nazwisko %>" id="mechanicname" disabled />
         <span class="errors-text"></span>
 
 
         <label for="car" class="bold-txt">Pojazd (Rejestracja): </label>
-        <input type="text" name="car" value="WY 13920" id="car" disabled />
+        <input type="text" name="car" value="<%= repair.Pojazd.Tablica_Rejestracyjna %>" id="car" disabled />
         <span class="errors-text"></span>
 
         
     </form>
-    <a href="/repair/edit/:1" class="list-actions-button-edit">Edytuj</a>  
+    <a href="/repair/edit/<%= repair.id_Naprawa %>" class="list-actions-button-edit">Edytuj</a>  
     <h2>
         Mechanik:
     </h2>
@@ -44,9 +44,9 @@
     
         <tbody>
             <tr>
-                <td>Kowalski</td>
-                <td>Stefan</td>
-                <td>Certyfikat AutoKasacja 2013</td>
+                <td><%= repair.Mechanik.Nazwisko %></td>
+                <td><%= repair.Mechanik.Imie %></td>
+                <td><%= repair.Mechanik.Doswiadczenie %></td>
             </tr>
         </tbody>
         </table>
@@ -67,9 +67,9 @@
         
             <tbody>
                 <tr>
-                    <td>Alfa Romeo</td>
-                    <td>WY 13920</td>
-                    <td>192564 km</td>
+                    <td><%= repair.Pojazd.Marka %></td>
+                    <td><%= repair.Pojazd.Tablica_Rejestracyjna %></td>
+                    <td><%= repair.Pojazd.Przebieg %></td>
                 </tr>
             </tbody>
             </table>

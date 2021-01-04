@@ -15,8 +15,34 @@
                 <th>Akcje</th>
             </tr>
         </thead>
-        
+
+        <tbody>
+            <% for (let repair of repairs) { %>
+                <tr>
+                    <td><%= repair.OpisUszkodzenia %></td>
+                    <td><%= repair.Nazwisko %></td>
+                    <td><%= repair.Tablica_Rejestracyjna %></td>
+                    <td><%= repair.DataNaprawy.toISOString().split('T')[0]  %></td>
+                    <td><%= repair.KosztNaprawy %> zł</td>
+                    <td>
+                        <ul class="list-actions">
+                            <li>
+                                <a href="/repair/details/<%= repair.id_Naprawa %>" class="list-actions-button-details">Szczegóły</a>
+                            </li>
+                            <li>
+                                <a href="/repair/edit/<%= repair.id_Naprawa %>" class="list-actions-button-edit">Edytuj</a>
+                            </li>
+                            <li>
+                                <a href="/repair/delete/<%= repair.id_Naprawa %>" class="list-actions-button-delete">Usuń</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            <% } %>
     
+        </tbody>
+        
+<!--     
         <tbody>
             <tr>
                 <td>Uszkodzona chłodnica</td>
@@ -60,7 +86,7 @@
                 </td>
             
             </tr>
-        </tbody>
+        </tbody> -->
         </table>
 
         <p><a href="/repair/add" class="button-add">Dodaj nową naprawę</a></p>

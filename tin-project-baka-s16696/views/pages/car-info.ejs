@@ -1,29 +1,28 @@
 <%- include('../header.ejs') %>
     <main>
-        <h2>
-            Szczegóły o pojeździe
-        </h2>
+        <h2><%= pageTitle %></h2>
         <form class="form" novalidate onsubmit="return validateForm();">   
 
         <label for="carName" class="bold-txt">Marka: </label>
-        <input type="text" name="carName" value="Alfa Romeo" id="carName" disabled />
+        <input type="text" name="Marka" value="<%= car.Marka %>" id="carName" disabled />
         <span id="errorCarName" class="errors-text"></span>
 
         <label for="idr" class="bold-txt">Rejestracja: </label>
-        <input type="text" name="idr" value="WY 13920" id="idr" disabled />
+        <input type="text" name="Tablica_Rejestracyjna" value="<%= car.Tablica_Rejestracyjna %>" id="idr" disabled />
         <span id="errorCarIdr" class="errors-text"></span>
 
         <label for="mileage" class="bold-txt">Przebieg: </label>
-        <input type="text" name="mileage" value="192564 km" id="mileage" disabled />
+        <input type="text" name="mileage" value="<%= car.Przebieg%><%= car.Jednostka_KmMil%>" id="mileage" disabled />
         <span id="errorCarMileage" class="errors-text"></span>
 
 
     </form>
-    <a href="/car/edit/:1" class="list-actions-button-edit">Edytuj</a>  
+    <a href="/car/edit/<%= car.id_Pojazd %>" class="list-actions-button-edit">Edytuj</a>  
     <h2>
         Lista napraw wykonanych w tym pojeździe:
     </h2>
 
+    <%if (car.naprawy.length > 0) { %>
     <table class="table-list">
         <thead>
             <tr>
@@ -34,7 +33,22 @@
             </tr>
         </thead>
     
+
         <tbody>
+    
+            <% for (let e of car.naprawy) { %>
+                <tr>
+                    <td><%= e.OpisUszkodzenia %></td>
+                    <td><%= e.Imie %></td>
+                    <td><%= e.DataNaprawy.toISOString().split('T')[0] %></td>
+                    <td><%= e.KosztNaprawy %> zł</td>
+
+                </tr>
+            <% } %>
+        </tbody>
+
+        
+        <!-- <tbody>
             <tr>
                 <td>Uszkodzona chłodnica</td>
                 <td>Adam</td>
@@ -49,8 +63,11 @@
                 <td>900 zł</td>
             
             </tr>
-        </tbody>
+        </tbody> -->
         </table>
+        <% } else{ %>  
+            <h3>Brak napraw</h3>
+         <% } %>
 
         <a href="/car" class="list-actions-button-details form-buttons">Powrót</a>  
 
