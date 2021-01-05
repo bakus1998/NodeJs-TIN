@@ -41,7 +41,7 @@
                     <tr>
                         <td><%= e.OpisUszkodzenia %></td>
                         <td><%= e.Pojazd.Tablica_Rejestracyjna %></td>
-                        <td><%= e.Pojazd.Przebieg %></td>
+                        <td><%= e.Pojazd.Przebieg %> <%= e.Pojazd.Jednostka_KmMil %></td>
                         <!-- <td><%= e.DataNaprawy %></td> -->
                         <td><%= e.DataNaprawy.toISOString().split('T')[0] %></td>
                         <td><%= e.KosztNaprawy %></td>

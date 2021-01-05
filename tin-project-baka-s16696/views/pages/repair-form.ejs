@@ -21,21 +21,22 @@
 
         <label>Mechanik:</label>
               <select id="mechanik" name="id_mechanik" required <%= (formMode == 'showDetails') ? 'disabled' : ''%> >
-            <% for (let i=0; i<allEmps.length; i++) { let emp = allEmps[i]; %>
+                <option value="" selected>--- Wybierz mechanika ---</option>
+                <% for (let i=0; i<allEmps.length; i++) { let emp = allEmps[i]; %>
                 <option value="<%= emp.id_mechanik %>" label="<%= emp.Nazwisko + ' ' + emp.Imie %>"></option>
             <% } %>
         </select>
-        <span class="errors-text"></span>        
+        <span id="errorRepairMechanic" class="errors-text"></span>        
         
 
         <label>Wybierz pojazd (Rejestracja):</label>
         <select id="pojazd" name="id_Pojazd" required <%= (formMode == 'showDetails') ? 'disabled' : ''%> >
+            <option value="" selected>--- Wybierz pojazd ---</option>
             <% for (let i=0; i<allDepts.length; i++) { let emp = allDepts[i]; %>
                 <option value="<%= emp.id_Pojazd %>" label="<%= emp.Tablica_Rejestracyjna %>"></option>
             <% } %>
         </select>
-
-        <span class="errors-text"></span>
+        <span id="errorRepairPojazd" class="errors-text"></span>
 
     <div class="form-buttons">
     <p id="errorsSummary" class="errors-text"></p>

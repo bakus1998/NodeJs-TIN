@@ -104,6 +104,6 @@ exports.deleteMechanic = (req, res, next) => {
     console.log("TO TUTAJ : " + carId);
     CarRepository.deleteCar(carId)
     .then( () => {
-        res.redirect('/car');
+        res.redirect('/mechanics');
     });
 };

@@ -12,9 +12,19 @@ exports.getCars = () =>{
 };
 
 exports.deleteCar = (carId) =>{
-    const sql = 'DELETE FROM Pojazd WHERE id_Pojazd = ?'
-    return db.promise().execute(sql, [carId]);
+    const sql = 'DELETE FROM Naprawa WHERE id_Pojazd = ?'
+    //return db.promise().execute(sql, [carId]);
+    return db.promise().query(sql, [carId])
+    .then( (results, fields) => {
+    const sql2 = 'DELETE FROM Pojazd WHERE id_Pojazd = ?'
+    return db.promise().execute(sql2, [carId]);
+    })
+    .catch(err => {
+        console.log(err);
+        throw err;
+});
 };
+
 
 exports.createCar = (newCarData) => {
     const Marka = newCarData.Marka;

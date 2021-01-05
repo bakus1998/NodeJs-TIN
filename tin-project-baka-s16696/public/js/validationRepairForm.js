@@ -4,15 +4,19 @@ function validateForm() {
     const RepairDamage = document.getElementById('damage');
     const RepairDate = document.getElementById('date');
     const RepairPrice = document.getElementById('price');
+    const RepairMechanic = document.getElementById('mechanik');
+    const RepairPojazd = document.getElementById('pojazd');
 
     const errorsSummary = document.getElementById('errorsSummary');
 
     const errorRepairDamage = document.getElementById('errorRepairDamage');
     const errorRepairDate = document.getElementById('errorRepairDate');
     const errorRepairPrice = document.getElementById('errorRepairPrice');
+    const errorRepairMechanic = document.getElementById('errorRepairMechanic');
+    const errorRepairPojazd = document.getElementById('errorRepairPojazd');
 
 
-    resetErrors([RepairDamage,RepairDate,RepairPrice],[errorRepairDamage,errorRepairDate,errorRepairPrice],errorsSummary);
+    resetErrors([RepairDamage,RepairDate,RepairPrice,RepairMechanic,RepairPojazd],[errorRepairDamage,errorRepairDate,errorRepairPrice,errorRepairMechanic,errorRepairPojazd],errorsSummary);
 
     let valid = true;
 
@@ -66,10 +70,28 @@ function validateForm() {
         errorsSummary.innerText = "Formularz zawiera błędy";
     }
 
+    if (!checkRequired(RepairMechanic.value)) {
+        valid = false;
+        RepairMechanic.classList.add("error-input");
+        errorRepairMechanic.innerText = "Pole jest wymagane";
+    }
+
+    if (!checkRequired(RepairPojazd.value)) {
+        valid = false;
+        RepairPojazd.classList.add("error-input");
+        errorRepairPojazd.innerText = "Pole jest wymagane";
+    }
+
+
+
+    
+
     return valid;
 
 
 }
+
+
 
 function resetErrors(inputs, errorTexts, errorInfo) {
     for(let i=0; i<inputs.length; i++) {

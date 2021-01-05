@@ -14,8 +14,17 @@ exports.getMechanics = () =>{
 
 
 exports.deleteMechanic = (mechanicId) =>{
-    const sql = 'DELETE FROM Mechanik WHERE id_mechanik = ?'
-    return db.promise().execute(sql, [mechanicId]);
+    const sql = 'DELETE FROM Naprawa WHERE id_mechanik = ?'
+    //return db.promise().execute(sql, [mechanicId]);
+    return db.promise().query(sql, [mechanicId])
+    .then( (results, fields) => {
+      const sql2 = 'DELETE FROM Mechanik WHERE id_mechanik = ?'
+      return db.promise().execute(sql2, [mechanicId]);
+    })
+    .catch(err => {
+        console.log(err);
+        throw err;
+    });
 };
 
 exports.createMechanic = (newMechanicData) => {
@@ -29,7 +38,7 @@ exports.createMechanic = (newMechanicData) => {
 exports.getMechanicById = (mechanicId) =>{
     const query = 
     `SELECT m.Nazwisko, m.Imie, m.Doswiadczenie, n.OpisUszkodzenia,
-    p.Tablica_Rejestracyjna, p.Przebieg, n.DataNaprawy, n.KosztNaprawy, n.id_Naprawa, p.id_Pojazd, m.id_mechanik
+    p.Tablica_Rejestracyjna, p.Przebieg, n.DataNaprawy, n.KosztNaprawy, n.id_Naprawa, p.id_Pojazd, m.id_mechanik, p.Jednostka_KmMil
     FROM Mechanik m
     JOIN Naprawa n
     ON n.id_mechanik = m.id_mechanik
@@ -81,7 +90,8 @@ return db.promise().query(query, [mechanicId])
                     Pojazd: {
                         id_Pojazd: row.id_Pojazd,
                         Tablica_Rejestracyjna: row.Tablica_Rejestracyjna,
-                        Przebieg: row.Przebieg
+                        Przebieg: row.Przebieg,
+                        Jednostka_KmMil: row.Jednostka_KmMil
                     }
                 };
                 mechanic.naprawy.push(Naprawa);
