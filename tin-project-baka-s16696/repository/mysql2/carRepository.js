@@ -1,4 +1,7 @@
 const db = require('../../config/mysql2/db');
+const empSchema = require('../../model/joi/Car');
+const empSchemaa = require('../../model/joi/Carshow');
+
 
 exports.getCars = () =>{
     return db.promise().query('Select * From Pojazd')
@@ -13,7 +16,6 @@ exports.getCars = () =>{
 
 exports.deleteCar = (carId) =>{
     const sql = 'DELETE FROM Naprawa WHERE id_Pojazd = ?'
-    //return db.promise().execute(sql, [carId]);
     return db.promise().query(sql, [carId])
     .then( (results, fields) => {
     const sql2 = 'DELETE FROM Pojazd WHERE id_Pojazd = ?'
@@ -25,8 +27,13 @@ exports.deleteCar = (carId) =>{
 });
 };
 
-
 exports.createCar = (newCarData) => {
+    const vRes = empSchema.validate(newCarData, { abortEarly: false} );
+    if(vRes.error) {
+        return Promise.reject(vRes.error);
+    }
+
+
     const Marka = newCarData.Marka;
     const Przebieg = parseInt(newCarData.Przebieg);
     const Jednostka_KmMil = newCarData.Jednostka_KmMil;
@@ -35,50 +42,12 @@ exports.createCar = (newCarData) => {
     return db.promise().execute(sql, [Marka, Przebieg, Jednostka_KmMil,Tablica_Rejestracyjna]);
 };
 
-// exports.getCarByIda = (carId) =>{
-//     const query = `SELECT e._id as _id, e.firstName, e.lastName, e.email, empl._id as empl_id,
-//         empl.salary, empl.dateFrom, dept._id as dept_id, empl.dateTo, dept.name, dept.budget 
-//     FROM Employee e 
-//     left join Employment empl on empl._id = e._id
-//     left join Department dept on empl._id = dept._id 
-//     where e._id = ?`
-// return db.promise().query(query, [empId])
-//     .then( (results, fields) => {
-//         const firstRow = results[0][0];
-//         if(!firstRow) {
-//             return {};
-//         }
-//         const emp = {
-//             _id: parseInt(empId),
-//             firstName: firstRow.firstName,
-//             lastName: firstRow.lastName,
-//             email: firstRow.email,
-//             employments: []
-//         }
-//         for( let i=0; i<results[0].length; i++ ) {
-//             const row = results[0][i];
-//             if(row.empl_id) {
-//                 const employment = {
-//                     _id: row.empl_id,
-//                     salary: row.salary,
-//                     dateFrom: row.dateFrom,
-//                     dateTo: row.dateTo,
-//                     department: {
-//                         _id: row.dept_id,
-//                         name: row.name,
-//                         budget: row.budget
-//                     }
-//                 };
-//                 emp.employments.push(employment);
-//             }
-//         }
-//         return emp;
-//     })
-//     .catch(err => {
-//         console.log(err);
-//         throw err;
-//     });
-// }
+exports.createCarShow = () => {
+    const vRes = empSchemaa.validate(null, { abortEarly: false} );
+    if(vRes.error) {
+        return Promise.reject(vRes.error);
+    }
+}
 
 exports.getCarById = (carId) =>{
     const query = 
@@ -148,6 +117,11 @@ return db.promise().query(query, [carId])
 }
 
 exports.updateCar = (carId, carData) => {
+    const vRes = empSchema.validate(carData, { abortEarly: false} );
+    if(vRes.error) {
+        console.log("ERROR: " +vRes.error)
+        return Promise.reject(vRes.error);
+    }
     const Marka = carData.Marka;
     const Przebieg = carData.Przebieg;
     const Jednostka_KmMil = carData.Jednostka_KmMil;
@@ -155,17 +129,3 @@ exports.updateCar = (carId, carData) => {
     const sql = `UPDATE Pojazd set Marka = ?, Przebieg = ?, Jednostka_KmMil = ?, Tablica_Rejestracyjna = ? where id_Pojazd = ?`;
     return db.promise().execute(sql, [Marka, Przebieg, Jednostka_KmMil, Tablica_Rejestracyjna,carId]);
 };
-
-/*
-
-SELECT p.id_Pojazd, p.Marka, p.Przebieg, p.Jednostka_KmMil, 
-n.OpisUszkodzenia, n.DataNaprawy, n.KosztNaprawy, m.Imie
-FROM Pojazd p
-JOIN Naprawa n
-ON n.id_Pojazd=p.id_Pojazd
-JOIN Mechanik m
-ON m.id_mechanik=n.id_mechanik
-WHERE p.id_Pojazd=1;
-
-
-*/

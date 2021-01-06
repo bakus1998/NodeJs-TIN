@@ -1,8 +1,3 @@
-// exports.showRepairList = (req, res, next) => {
-//     res.render('pages/repair-list', {navLocation: 'repair'});
-// }
-
-
 const RepairRepository = require('../repository/mysql2/repairRepository');
 const MechanicRepository = require('../repository/mysql2/mechanicRepository');
 const CarRepository = require('../repository/mysql2/carRepository');
@@ -38,30 +33,46 @@ exports.showRepairForm = (req, res, next) => {
                 pageTitle: 'Dodaj nową naprawę',
                 btnLabel: 'Nowa naprawa',
                 formAction: '/repair/add',
-                navLocation: 'repair'
+                navLocation: 'repair',
+                emp: {},
+                validationErrors: {}
             });
         });
 }
 
 
 exports.addRepair = (req, res, next) => {
+
     const repairData = { ...req.body };
     console.log(req.body);
     RepairRepository.createRepair(repairData)
         .then( result => {
             res.redirect('/repair');
+        }).catch(err => {
+            let allEmps, allDepts;
+            MechanicRepository.getMechanics()
+            .then(emps => {
+                allEmps = emps;
+                return CarRepository.getCars();
+            })
+            .then(depts => {
+                allDepts = depts;
+                res.render('pages/repair-form', {
+                    employment: {},
+                    formMode: 'createNew',
+                    pageTitle: 'Dodaj nową naprawę',
+                    btnLabel: 'Nowa naprawa',
+                    formAction: '/repair/add',
+                    navLocation: 'repair',
+                    emp: repairData,
+                    allEmps: allEmps,
+                    allDepts: allDepts,
+                    validationErrors: err.details
+               });
+              
+            });
         });
 };
-
-
-// exports.showRepairForm = (req, res, next) => {
-//     res.render('pages/repair-form', {navLocation: 'repair'});
-// }
-
-// exports.showRepairInfo = (req, res, next) => {
-//     res.render('pages/repair-info', {navLocation: 'repair'});
-// }
-
 
 exports.showRepairInfo = (req, res, next) => {
     const repairId = req.params.repairId;
@@ -78,14 +89,7 @@ exports.showRepairInfo = (req, res, next) => {
 }
 
 
-// exports.showRepairEdit = (req, res, next) => {
-//     res.render('pages/repair-edit', {navLocation: 'repair'});
-// }
-
-
 exports.showRepairEdit = (req, res, next) => {
-    // res.render('pages/mechanics-edit', {navLocation: 'mechanic'});
-
     const repairId = req.params.repairId;
     let repairEdit;
     let mechanicEdit;
@@ -109,8 +113,9 @@ exports.showRepairEdit = (req, res, next) => {
                 formMode: 'edit',
                 pageTitle: 'Aktualizacja naprawy',
                 btnLabel: 'Edytuj naprawę',
-                formAction: '/repair/edit/',
-                navLocation: 'repair'
+                formAction: '/repair/edit/'+repairId,
+                navLocation: 'repair',
+                validationErrors: {}
             });
         })
 }
@@ -118,9 +123,38 @@ exports.showRepairEdit = (req, res, next) => {
 exports.updateRepairEdit = (req, res, next) => {
     const repairId = req.body.id_Naprawa;
     const repairData = { ...req.body };
+    let repairEdit;
+    let mechanicEdit;
+    let carEdit;
     RepairRepository.updateRepair(repairId,repairData)
         .then( result => {
             res.redirect('/repair');
+        }).catch(err => {
+            RepairRepository.getRepairById(repairId)
+            .then(repair => {
+                repairEdit = repair;
+                return MechanicRepository.getMechanics();
+            })
+            .then(mechanics => {
+                mechanicEdit = mechanics;
+                return CarRepository.getCars();
+            })
+            .then(cars => {
+                carEdit = cars;
+                res.render('pages/repair-edit', {
+                    val: repairData,
+                    repairEdit: repairEdit,
+                    mechanicEdit: mechanicEdit,
+                    carEdit: carEdit,
+                    formMode: 'edit',
+                    pageTitle: 'Aktualizacja naprawy',
+                    btnLabel: 'Edytuj naprawę',
+                    formAction: '/repair/edit/'+repairId,
+                    navLocation: 'repair',
+                    validationErrors: err.details
+                });
+            
+            });
         });
 
 };

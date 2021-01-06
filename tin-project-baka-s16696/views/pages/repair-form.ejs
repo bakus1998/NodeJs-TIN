@@ -3,22 +3,70 @@
     <script type="application/javascript" src="/js/validationCommon.js"></script>
     <main>
         <h2><%= pageTitle %></h2>
-        <form class="form" method="POST" action="<%=formAction%>" novalidate onsubmit="return validateForm();">   
-
+        <form class="form" method="post" action="<%=formAction%>" novalidate onsubmit="return validateForm();">    
         <label for="damage">Opis uszkodzenia: <abbr title="required" aria-label="required">*</abbr></label>
-        <input type="text" name="OpisUszkodzenia" id="damage" placeholder="10-300 znaków"/>
-        <span id="errorRepairDamage" class="errors-text"></span>
+        
+        <% if (Object.keys(validationErrors).length === 0) {%>
+            <input type="text" name="OpisUszkodzenia" value="<%= emp.OpisUszkodzenia %>" id="damage" placeholder="10-300 znaków"/>
+        <% } else{ %>  
+            <input class="<%= validationErrors.find(e => e.path.includes('OpisUszkodzenia')) ? 'error-input' : '' %>" type="text" name="OpisUszkodzenia" value="<%= emp.OpisUszkodzenia %>" id="damage" placeholder="10-300 znaków"/>
+        <% } %>
+
+        <span id="errorRepairDamage" class="errors-text">
+
+        <% if (Object.keys(validationErrors).length === 0) {%>
+
+        <% } else{ %>  
+            <span id="errorRepairDamage" class="errors-text"></span>
+            <% if (validationErrors.find(e => e.path.includes('OpisUszkodzenia'))) { %>
+                <p><%= validationErrors.find(e => e.path.includes('OpisUszkodzenia')).schema %></p>
+                <%= validationErrors.find(e => e.path.includes('OpisUszkodzenia')).message %>
+            <% } %>
+
+        <% } %>  
+    </span>
 
 
         <label for="date">Data: <abbr title="required" aria-label="required">*</abbr></label>
-        <input type="date" name="DataNaprawy" id="date"/>
-        <span id="errorRepairDate" class="errors-text"></span>
 
-        <label for="price">Koszt: <abbr title="required" aria-label="required">*</abbr></label>
-        <input type="number" name="KosztNaprawy" id="price">
-        <span id="errorRepairPrice" class="errors-text"></span>
+        <% if (Object.keys(validationErrors).length === 0) {%>
+            <input type="date" name="DataNaprawy" id="date" value="<%= emp.DataNaprawy %>"/>
+        <% } else{ %>  
+            <input class="<%= validationErrors.find(e => e.path.includes('DataNaprawy')) ? 'error-input' : '' %>" type="date" name="DataNaprawy" id="date" value="<%= emp.DataNaprawy %>"/>
+        <% } %>
+
+        <span id="errorRepairDate" class="errors-text">
+
+            <% if (!(Object.keys(validationErrors).length === 0)) {%>
+                <% if (validationErrors.find(e => e.path.includes('DataNaprawy'))) { %>
+                    <p><%= validationErrors.find(e => e.path.includes('DataNaprawy')).schema %></p>
+                    <%= validationErrors.find(e => e.path.includes('DataNaprawy')).message %>
+                <% } %>
+            <% } %>  
+        </span>
 
 
+        <label for="price">Koszt: (zł)<abbr title="required" aria-label="required">*</abbr></label>
+
+
+        <% if (Object.keys(validationErrors).length === 0) {%>
+            <input type="number" name="KosztNaprawy" id="price" value="<%= emp.KosztNaprawy %>">
+        <% } else{ %>
+            <input class="<%= validationErrors.find(e => e.path.includes('KosztNaprawy')) ? 'error-input' : '' %>" type="number" name="KosztNaprawy" id="price" value="<%= emp.KosztNaprawy %>">  
+        <% } %>        
+        <span id="errorRepairPrice" class="errors-text">
+            <% if (!(Object.keys(validationErrors).length === 0)) {%>
+                <% if (validationErrors.find(e => e.path.includes('KosztNaprawy'))) { %>
+                    <%= validationErrors.find(e => e.path.includes('KosztNaprawy')).message %>
+                <% } %>
+            <% } %>
+        </span>
+
+
+        <input type="hidden" name="allEmps" value="<%= emp.allEmps %>">
+        <input type="hidden" name="allDepts" value="<%= emp.allDepts %>">
+
+        <% if (Object.keys(validationErrors).length === 0) {%>
         <label>Mechanik:</label>
               <select id="mechanik" name="id_mechanik" required <%= (formMode == 'showDetails') ? 'disabled' : ''%> >
                 <option value="" selected>--- Wybierz mechanika ---</option>
@@ -26,7 +74,14 @@
                 <option value="<%= emp.id_mechanik %>" label="<%= emp.Nazwisko + ' ' + emp.Imie %>"></option>
             <% } %>
         </select>
-        <span id="errorRepairMechanic" class="errors-text"></span>        
+        <span id="errorRepairMechanic" class="errors-text">
+            <% if (!(Object.keys(validationErrors).length === 0)) {%>
+                <% if (validationErrors.find(e => e.path.includes('id_mechanik'))) { %>
+                    <%= validationErrors.find(e => e.path.includes('id_mechanik')).message %>
+                <% } %>
+            <% } %>
+        </span>
+        
         
 
         <label>Wybierz pojazd (Rejestracja):</label>
@@ -36,7 +91,56 @@
                 <option value="<%= emp.id_Pojazd %>" label="<%= emp.Tablica_Rejestracyjna %>"></option>
             <% } %>
         </select>
-        <span id="errorRepairPojazd" class="errors-text"></span>
+        <span id="errorRepairPojazd" class="errors-text">
+            <% if (!(Object.keys(validationErrors).length === 0)) {%>
+                <% if (validationErrors.find(e => e.path.includes('id_Pojazd'))) { %>
+                    <%= validationErrors.find(e => e.path.includes('id_Pojazd')).message %>
+                <% } %>
+            <% } %>
+        </span>
+        
+
+        <% } else{ %>  
+        <label>Mechanik:</label>
+              <select class="<%= validationErrors.find(e => e.path.includes('id_mechanik')) ? 'error-input' : '' %>"  id="mechanik" name="id_mechanik" required <%= (formMode == 'showDetails') ? 'disabled' : ''%> >
+                <option value="" selected>--- Wybierz mechanika ---</option>
+                <% for (let i=0; i<allEmps.length; i++) { let emps = allEmps[i]; %>
+                <option value="<%= emps.id_mechanik %>" label="<%= emps.Nazwisko + ' ' + emps.Imie %>"
+                    <%= ( emps.id_mechanik.toString() == emp.id_mechanik.toString()) ? 'selected' : ''%>
+                    ></option>
+
+
+            <% } %>
+        </select>
+        <span id="errorRepairMechanic" class="errors-text">
+            <% if (!(Object.keys(validationErrors).length === 0)) {%>
+                <% if (validationErrors.find(e => e.path.includes('id_mechanik'))) { %>
+                    <%= validationErrors.find(e => e.path.includes('id_mechanik')).message %>
+                <% } %>
+            <% } %>
+        </span>
+            
+        
+
+        <label>Wybierz pojazd (Rejestracja):</label>
+        <select class="<%= validationErrors.find(e => e.path.includes('id_Pojazd')) ? 'error-input' : '' %>" id="pojazd" name="id_Pojazd" required <%= (formMode == 'showDetails') ? 'disabled' : ''%> >
+            <option value="" selected>--- Wybierz pojazd ---</option>
+            <% for (let i=0; i<allDepts.length; i++) { let emps = allDepts[i]; %>
+                <option value="<%= emps.id_Pojazd %>" label="<%= emps.Tablica_Rejestracyjna %>"
+                    <%= ( emps.id_Pojazd.toString() == emp.id_Pojazd.toString()) ? 'selected' : ''%>
+                    ></option>
+
+            <% } %>
+        </select>
+        <span id="errorRepairPojazd" class="errors-text">
+            <% if (!(Object.keys(validationErrors).length === 0)) {%>
+                <% if (validationErrors.find(e => e.path.includes('id_Pojazd'))) { %>
+                    <%= validationErrors.find(e => e.path.includes('id_Pojazd')).message %>
+                <% } %>
+            <% } %>
+        </span>
+
+        <% } %>
 
     <div class="form-buttons">
     <p id="errorsSummary" class="errors-text"></p>

@@ -27,8 +27,6 @@ exports.deleteMechanic = (req, res, next) => {
 };
 
 
-
-
 exports.createMechanic = (req, res, next) => {
     mechanicRepository.createMechanic(req.body)
         .then(newObj => {

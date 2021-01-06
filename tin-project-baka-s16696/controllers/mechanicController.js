@@ -2,7 +2,6 @@ const MechanicRepository = require('../repository/mysql2/mechanicRepository');
 
 
 exports.showMechanicList = (req, res, next) => {
-    // res.render('pages/mechanics-list', {navLocation: 'mechanic'});
     MechanicRepository.getMechanics()
     .then(emps => {
         res.render('pages/mechanics-list', {
@@ -13,12 +12,27 @@ exports.showMechanicList = (req, res, next) => {
 }
 
 exports.showMechanicForm = (req, res, next) => {
-    res.render('pages/mechanics-form', {
-        mechanics:{},
-        pageTitle: 'Dodaj nowego mechanika',
-        formMode: 'createNew',
-        formAction: '/mechanics/add', //TU 
-        navLocation: 'mechanic'});
+    MechanicRepository.createMechanicShow()
+        .then( result => {
+            res.redirect('/mechanics');
+        })
+        .catch(err => {
+            console.log(err);
+            res.render('pages/mechanics-form', {
+                pageTitle: 'Dodawanie pracownika',
+                formMode: 'createNew',
+                btnLabel: 'Dodaj pracownika',
+                formAction: '/mechanics/add',
+                navLocation: 'mechanic',
+                emp:{
+                    Nazwisko: '',
+                    Imie:'',
+                    Doswiadczenie: ''
+                },
+                validationErrors: err.details
+            });
+        });
+        
 }
 
 exports.addEmployee = (req, res, next) => {
@@ -26,12 +40,23 @@ exports.addEmployee = (req, res, next) => {
     MechanicRepository.createMechanic(empData)
         .then( result => {
             res.redirect('/mechanics');
+        })
+        .catch(err => {
+            console.log(err);
+            res.render('pages/mechanics-form', {
+                emp: empData,
+                pageTitle: 'Dodawanie pracownika',
+                formMode: 'createNew',
+                btnLabel: 'Dodaj pracownika',
+                formAction: '/mechanics/add',
+                navLocation: 'mechanic',
+                validationErrors: err.details
+            });
         });
 };
 
 
 exports.showMechanicInfo = (req, res, next) => {
-    // res.render('pages/mechanic-info', {navLocation: 'mechanic'});
     const mechanicId = req.params.mechanicId;
     MechanicRepository.getMechanicById(mechanicId)
         .then(emp => {
@@ -46,51 +71,45 @@ exports.showMechanicInfo = (req, res, next) => {
 }
 
 exports.showMechanicEdit = (req, res, next) => {
-    // res.render('pages/mechanics-edit', {navLocation: 'mechanic'});
-
     const mechanicId = req.params.mechanicId;
-    console.log("TO TUTAJ : " + mechanicId);
+    console.log("TO TUTAJ show : " + mechanicId);
     MechanicRepository.getMechanicById(mechanicId)
         .then(emp => {
+            console.log("TO TUTAJ show  RENDER: " + mechanicId);
             res.render('pages/mechanics-edit', {
                 emp: emp,
                 formMode: 'edit',
                 pageTitle: 'Aktualizacja mechanika',
-                btnLabel: 'Edytuj pracownika',
-                formAction: '/mechanics/edit/',
-                navLocation: 'mechanic'
+                btnLabel: 'Edytuj mechanika',
+                formAction: '/mechanics/edit/'+mechanicId,
+                navLocation: 'mechanic',
+                validationErrors: {}
             });
         });
-
 }
 
 
 exports.updateMechanicEdit = (req, res, next) => {
     const mechanicId = req.body.id_mechanic;
     const empData = { ...req.body };
-    //const mechanicId = req.body.id_mechanik;
     MechanicRepository.updateMechanic(mechanicId,empData)
         .then( result => {
             res.redirect('/mechanics');
+        })
+        .catch(err => {
+            console.log("TO UPDATE : " + mechanicId);
+            res.render('pages/mechanics-form', {
+                emp: empData,
+                pageTitle: 'Aktualizacja mechanika',
+                formMode: 'edit',
+                btnLabel: 'Edytuj mechanika',
+                formAction: '/mechanics/edit/'+mechanicId,
+                navLocation: 'mechanic',
+                validationErrors: err.details
+            });
         });
-
-    //console.log("TO TUTAJ : " + mechanicId);
 };
 
-
-
-// exports.DeleteMechanic= (req, res, next) => {
-//     // res.render('pages/mechanics-list', {navLocation: 'mechanic'});
-//     const MechanicId = req.params.empId;
-
-//     MechanicRepository.deleteMechanic()
-//     .then(emps => {
-//         res.render('pages/mechanics-list', {
-//             emps: emps,
-//             navLocation: 'mechanic'
-//         });
-//     });
-// }
 
 exports.deleteMechanic = (req, res, next) => {
     const mechanicId = req.params.mechanicId;
@@ -98,5 +117,7 @@ exports.deleteMechanic = (req, res, next) => {
     MechanicRepository.deleteMechanic(mechanicId)
     .then( () => {
         res.redirect('/mechanics');
+    }).catch(e =>{
+
     });
 };

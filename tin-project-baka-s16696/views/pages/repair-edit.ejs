@@ -2,24 +2,69 @@
 
     <script type="application/javascript" src="/js/validationRepairForm.js"></script>
     <script type="application/javascript" src="/js/validationCommon.js"></script>
+
     <main>
         <h2><%= pageTitle %></h2>
-        <form class="form" method="POST" action="<%=formAction%>" novalidate onsubmit="return validateForm();">   
+        <form class="form" method="post" action="<%=formAction%>" novalidate onsubmit="return validateForm();">    
+
+        
 
         <label for="damage">Opis uszkodzenia: <abbr title="required" aria-label="required">*</abbr></label>
-        <input type="text" name="OpisUszkodzenia" value="<%= repairEdit.OpisUszkodzenia %>" id="damage"/>
-        <span id="errorRepairDamage" class="errors-text"></span>
+        <% if ((Object.keys(validationErrors).length === 0)) {%>
+            <input type="text" name="OpisUszkodzenia" value="<%= repairEdit.OpisUszkodzenia %>" id="damage" placeholder="10-300 znaków"/>
+        <% } else{ %>  
+            <input class="<%= validationErrors.find(e => e.path.includes('OpisUszkodzenia')) ? 'error-input' : '' %>" type="text" name="OpisUszkodzenia" value="<%= val.OpisUszkodzenia %>" id="damage" placeholder="10-300 znaków"/>
+        <% } %>
 
+        <span id="errorRepairDamage" class="errors-text">
+            <% if (!(Object.keys(validationErrors).length === 0)) {%>
+                <% if (validationErrors.find(e => e.path.includes('OpisUszkodzenia'))) { %>
+                    <p><%= validationErrors.find(e => e.path.includes('OpisUszkodzenia')).schema %></p>
+                    <%= validationErrors.find(e => e.path.includes('OpisUszkodzenia')).message %>
+                <% } %>
+            <% } %>  
+        </span>
+
+    
 
         <label for="date">Data: <abbr title="required" aria-label="required">*</abbr></label>
-        <input type="date" name="DataNaprawy" value="<%= repairEdit.DataNaprawy.toISOString().split('T')[0]  %>" id="date"/>
-        <span id="errorRepairDate" class="errors-text"></span>
 
-        <label for="price">Koszt: <abbr title="required" aria-label="required">*</abbr></label>
-        <input type="number" name="KosztNaprawy" value="<%= repairEdit.KosztNaprawy %>" id="price">
-        <span id="errorRepairPrice" class="errors-text"></span>
+        <% if (Object.keys(validationErrors).length === 0) {%>
+            <input type="date" name="DataNaprawy" value="<%= repairEdit.DataNaprawy.toISOString().split('T')[0]  %>" id="date"/>
+        <% } else{ %>  
+            <input class="<%= validationErrors.find(e => e.path.includes('DataNaprawy')) ? 'error-input' : '' %>" type="date" name="DataNaprawy" value="<%= val.DataNaprawy  %>" id="date"/>
+        <% } %>
+        <span id="errorRepairDate" class="errors-text">
+            <% if (!(Object.keys(validationErrors).length === 0)) {%>
+                <% if (validationErrors.find(e => e.path.includes('DataNaprawy'))) { %>
+                    <p><%= validationErrors.find(e => e.path.includes('DataNaprawy')).schema %></p>
+                    <%= validationErrors.find(e => e.path.includes('DataNaprawy')).message %>
+                <% } %>
+            <% } %>  
+        </span>
+
+
+
+
+        <label for="price">Koszt: (zł)<abbr title="required" aria-label="required">*</abbr></label>
+
+        <% if (Object.keys(validationErrors).length === 0) {%>
+            <input type="number" name="KosztNaprawy" value="<%= repairEdit.KosztNaprawy %>" id="price">
+            <% } else{ %>  
+                <input class="<%= validationErrors.find(e => e.path.includes('KosztNaprawy')) ? 'error-input' : '' %>" type="number" name="KosztNaprawy" value="<%= val.KosztNaprawy %>" id="price">
+        <% } %>
+        <span id="errorRepairPrice" class="errors-text">
+            <% if (!(Object.keys(validationErrors).length === 0)) {%>
+                <% if (validationErrors.find(e => e.path.includes('KosztNaprawy'))) { %>
+                    <p><%= validationErrors.find(e => e.path.includes('KosztNaprawy')).schema %></p>
+                    <%= validationErrors.find(e => e.path.includes('KosztNaprawy')).message %>
+                <% } %>
+            <% } %>  
+        </span>
 
         <input type="hidden" name="id_Naprawa" value="<%= repairEdit.id_Naprawa %>">
+
+        <% if (Object.keys(validationErrors).length === 0) {%>
 
         <label>Mechanik: <abbr title="required" aria-label="required">*</abbr></label>
 
@@ -45,6 +90,46 @@
             <% } %>
         </select>
         <span class="errors-text"></span>
+
+        <% } else{ %>
+            
+            <label>Mechanik: <abbr title="required" aria-label="required">*</abbr></label>
+
+            <select class="<%= validationErrors.find(e => e.path.includes('id_mechanik')) ? 'error-input' : '' %>" id="mechanic" name="id_mechanik" required <%= (formMode == 'showDetails') ? 'disabled' : ''%> >
+                <option value="" selected>--- Wybierz mechanika ---</option>
+                <% for (let i=0; i<mechanicEdit.length; i++) { let emp = mechanicEdit[i]; %>
+    
+                    <option value="<%= emp.id_mechanik %>" label="<%= emp.Nazwisko + ' ' + emp.Imie %>"
+                        <%= ( emp.id_mechanik.toString() == val.id_mechanik.toString()) ? 'selected' : ''%>></option>
+                <% } %>
+            </select>
+            <span id="errorRepairMechanic" class="errors-text">
+                <% if (!(Object.keys(validationErrors).length === 0)) {%>
+                    <% if (validationErrors.find(e => e.path.includes('id_mechanik'))) { %>
+                        <%= validationErrors.find(e => e.path.includes('id_mechanik')).message %>
+                    <% } %>
+                <% } %>
+            </span>
+    
+            <label>Wybierz pojazd: <abbr title="required" aria-label="required">*</abbr></label>
+            <select class="<%= validationErrors.find(e => e.path.includes('id_Pojazd')) ? 'error-input' : '' %>" id="pojazd" name="id_Pojazd" required <%= (formMode == 'showDetails') ? 'disabled' : ''%> >
+                <option value="" selected>--- Wybierz pojazd ---</option>
+                <% for (let i=0; i<carEdit.length; i++) { let emp = carEdit[i]; %>
+                    <option value="<%= emp.id_Pojazd %>" label="<%= emp.Tablica_Rejestracyjna %>"
+                       
+                        <%= ( emp.id_Pojazd.toString() == val.id_Pojazd.toString()) ? 'selected' : ''%>
+                        ></option>
+                <% } %>
+            </select>
+            <span id="errorRepairPojazd" class="errors-text">
+                <% if (!(Object.keys(validationErrors).length === 0)) {%>
+                    <% if (validationErrors.find(e => e.path.includes('id_Pojazd'))) { %>
+                        <%= validationErrors.find(e => e.path.includes('id_Pojazd')).message %>
+                    <% } %>
+                <% } %>
+            </span>
+
+        <% } %>
 
     <div class="form-buttons">
     <p id="errorsSummary" class="errors-text"></p>

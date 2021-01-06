@@ -1,13 +1,8 @@
-// exports.showCarList = (req, res, next) => {
-//     res.render('pages/cars-list', {navLocation: 'car'});
-// }
-
 const CarRepository = require('../repository/mysql2/carRepository');
 const { getMechanicById } = require('../repository/mysql2/mechanicRepository');
 
 
 exports.showCarList = (req, res, next) => {
-    // res.render('pages/mechanics-list', {navLocation: 'mechanic'});
     CarRepository.getCars()
     .then(cars => {
         res.render('pages/cars-list', {
@@ -17,19 +12,24 @@ exports.showCarList = (req, res, next) => {
     });
 }
 
-// exports.showCarForm = (req, res, next) => {
-//     res.render('pages/car-form', {navLocation: 'car'});
-// }
-
 exports.showCarForm = (req, res, next) => {
-    res.render('pages/car-form', {
-        cars:{},
-        pageTitle: 'Dodaj nowy pojazd',
-        formMode: 'createNew',
-        formAction: '/car/add', 
-        navLocation: 'car'});
+        CarRepository.createCarShow()        
+        .then( result => {
+            res.redirect('/car');
+        })
+        .catch(err => {
+            console.log(err);
+            res.render('pages/car-form', {
+                pageTitle: 'Dodaj nowy pojazd',
+                formMode: 'createNew',
+                btnLabel: 'Dodaj pojazd',
+                formAction: '/car/add',
+                navLocation: 'car',
+                emp:{},
+                validationErrors: err.details
+            });
+        });
 }
-
 
 
 exports.addCar = (req, res, next) => {
@@ -37,16 +37,22 @@ exports.addCar = (req, res, next) => {
     CarRepository.createCar(carData)
         .then( result => {
             res.redirect('/car');
-        });
+        }).catch(err => {
+            console.log(err);
+            res.render('pages/car-form', {
+                emp: carData,
+                pageTitle: 'Dodaj nowy pojazd',
+                formMode: 'createNew',
+                btnLabel: 'Dodaj pojazd',
+                formAction: '/car/add',
+                navLocation: 'car',
+                validationErrors: err.details
+            });
+        });;
 };
 
 
-// exports.showCarInfo = (req, res, next) => {
-//     res.render('pages/car-info', {navLocation: 'car'});
-// }
-
 exports.showCarInfo = (req, res, next) => {
-    // res.render('pages/mechanic-info', {navLocation: 'mechanic'});
     const carId = req.params.carId;
     CarRepository.getCarById(carId)
         .then(car => {
@@ -60,16 +66,8 @@ exports.showCarInfo = (req, res, next) => {
         });
 }
 
-// exports.showCarEdit = (req, res, next) => {
-//     res.render('pages/car-edit', {navLocation: 'car'});
-// }
-
-
 exports.showCarEdit = (req, res, next) => {
-    // res.render('pages/mechanics-edit', {navLocation: 'mechanic'});
-
     const carId = req.params.carId;
-    console.log("TO TUTAJ : " + carId);
     CarRepository.getCarById(carId)
         .then(car => {
             res.render('pages/car-edit', {
@@ -77,8 +75,9 @@ exports.showCarEdit = (req, res, next) => {
                 formMode: 'edit',
                 pageTitle: 'Aktualizacja pojazdu',
                 btnLabel: 'Edytuj pojazd',
-                formAction: '/car/edit/',
-                navLocation: 'car'
+                formAction: '/car/edit/'+carId,
+                navLocation: 'car',
+                validationErrors: {}
             });
         });
 
@@ -87,23 +86,28 @@ exports.showCarEdit = (req, res, next) => {
 
 exports.updateCarEdit = (req, res, next) => {
     const carId = req.body.id_Pojazd;
-    console.log("TO ten : " + carId);
-
     const carData = { ...req.body };
-    //const mechanicId = req.body.id_mechanik;
     CarRepository.updateCar(carId,carData)
         .then( result => {
             res.redirect('/car');
+        }).catch(err => {
+            res.render('pages/car-edit', {
+                car: carData,
+                pageTitle: 'Aktualizacja pojazdu',
+                formMode: 'edit',
+                btnLabel: 'Edytuj pojazd',
+                formAction: '/car/edit/'+carId,
+                navLocation: 'car',
+                validationErrors: err.details
+            });
         });
-
-    //console.log("TO TUTAJ : " + mechanicId);
 };
+
 
 exports.deleteMechanic = (req, res, next) => {
     const carId = req.params.carId;
-    console.log("TO TUTAJ : " + carId);
     CarRepository.deleteCar(carId)
     .then( () => {
-        res.redirect('/mechanics');
+        res.redirect('/car');
     });
 };

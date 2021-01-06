@@ -1,7 +1,7 @@
 <%- include('../header.ejs') %>
     <main>
         <h2><%= pageTitle %></h2>
-        <form class="form" novalidate onsubmit="return validateForm();">   
+        <form class="form" novalidate">   
      
        
         <label for="lastname" class="bold-txt">Nazwisko: </label>
@@ -42,9 +42,8 @@
                         <td><%= e.OpisUszkodzenia %></td>
                         <td><%= e.Pojazd.Tablica_Rejestracyjna %></td>
                         <td><%= e.Pojazd.Przebieg %> <%= e.Pojazd.Jednostka_KmMil %></td>
-                        <!-- <td><%= e.DataNaprawy %></td> -->
                         <td><%= e.DataNaprawy.toISOString().split('T')[0] %></td>
-                        <td><%= e.KosztNaprawy %></td>
+                        <td><%= e.KosztNaprawy %> zł</td>
                     </tr>
                 <% } %>
             </tbody>

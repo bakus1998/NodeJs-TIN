@@ -8,7 +8,7 @@ router.get('/add',mechanicController.showMechanicForm);
 router.post('/add',mechanicController.addEmployee);
 router.get('/details/:mechanicId',mechanicController.showMechanicInfo);
 router.get('/edit/:mechanicId',mechanicController.showMechanicEdit);
-router.post('/edit',mechanicController.updateMechanicEdit);
+router.post('/edit/:mechanicId',mechanicController.updateMechanicEdit);
 router.get('/delete/:mechanicId',mechanicController.deleteMechanic);
 
 module.exports=router;

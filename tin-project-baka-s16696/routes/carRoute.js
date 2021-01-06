@@ -8,7 +8,7 @@ router.get('/add',carController.showCarForm);
 router.post('/add',carController.addCar);
 router.get('/details/:carId',carController.showCarInfo);
 router.get('/edit/:carId',carController.showCarEdit);
-router.post('/edit',carController.updateCarEdit);
+router.post('/edit/:carId',carController.updateCarEdit);
 router.get('/delete/:carId',carController.deleteMechanic);
 
 

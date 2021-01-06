@@ -1,4 +1,3 @@
-
 function validateForm() {
 
     const LastnameInput = document.getElementById('lastname');
@@ -17,7 +16,7 @@ function validateForm() {
     if (!checkRequired(LastnameInput.value)) {
         valid = false;
         LastnameInput.classList.add("error-input");
-        errorFirstName.innerText = "Pole jest wymagane";
+        errorLastName.innerText = "Pole jest wymagane";
     } else if (!checkTextLengthRange(LastnameInput.value, 2, 60)) {
         valid = false;
         LastnameInput.classList.add("error-input");
@@ -27,7 +26,7 @@ function validateForm() {
     if (!checkRequired(FirstnameInput.value)) {
         valid = false;
         FirstnameInput.classList.add("error-input");
-        errorLastName.innerText = "Pole jest wymagane";
+        errorFirstname.innerText = "Pole jest wymagane";
     } else if (!checkTextLengthRange(FirstnameInput.value, 2, 60)) {
         valid = false;
         FirstnameInput.classList.add("error-input");
@@ -35,20 +34,21 @@ function validateForm() {
     }
 
     
-
-   if (checkMaxLength(ExpInput.value, 100)) {
+    if (!checkRequired(ExpInput.value)) {
         valid = false;
         ExpInput.classList.add("error-input");
-        errorExp.innerText = "Pole powinno zawierać do 100 znaków";
+        errorExp.innerText = "Pole jest wymagane";
+    } else if (!checkTextLengthRange(ExpInput.value, 1,100)) {
+        valid = false;
+        ExpInput.classList.add("error-input");
+        errorExp.innerText ="Pole powinno zawierać do 100 znaków";
     }
 
 
     if (!valid) {
         errorsSummary.innerText = "Formularz zawiera błędy";
     }
-
     return valid;
-
 
 }
 

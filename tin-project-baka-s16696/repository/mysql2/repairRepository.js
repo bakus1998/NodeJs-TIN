@@ -1,4 +1,5 @@
 const db = require('../../config/mysql2/db');
+const eSchema = require('../../model/joi/Repair');
 
 exports.getRepairs = () =>{
     const query = 
@@ -26,6 +27,10 @@ exports.deleteRepair= (repairId) =>{
 };
 
 exports.createRepair = (newRepairData) => {
+    const vRes = eSchema.validate(newRepairData, { abortEarly: false} );
+    if(vRes.error) {
+        return Promise.reject(vRes.error);
+    }
     const KosztNaprawy = newRepairData.KosztNaprawy;
     const OpisUszkodzenia = newRepairData.OpisUszkodzenia;
     const DataNaprawy = newRepairData.DataNaprawy;
@@ -37,6 +42,10 @@ exports.createRepair = (newRepairData) => {
 
 
 exports.updateRepair = (repairId, RepairData) => {
+    const vRes = eSchema.validate(RepairData, { abortEarly: false} );
+    if(vRes.error) {
+        return Promise.reject(vRes.error);
+    }
     const KosztNaprawy = RepairData.KosztNaprawy;
     const OpisUszkodzenia = RepairData.OpisUszkodzenia;
     const DataNaprawy = RepairData.DataNaprawy;
@@ -82,7 +91,6 @@ return db.promise().query(query, [repairId])
                 Przebieg: firstRow.Przebieg + firstRow.Jednostka_KmMil
             }
         }
-
         return Naprawa;
     })
     .catch(err => {

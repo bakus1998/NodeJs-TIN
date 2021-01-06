@@ -1,4 +1,3 @@
-
 function validateForm() {
 
     const CarInput = document.getElementById('carName');
@@ -44,14 +43,10 @@ function validateForm() {
         errorCarMileage.innerText = "Przebieg musi mieć poniżej 2.000.000";
     }
 
-
     if (!valid) {
         errorsSummary.innerText = "Formularz zawiera błędy";
     }
-
     return valid;
-
-
 }
 
 function resetErrors(inputs, errorTexts, errorInfo) {

@@ -1,9 +1,7 @@
 <%- include('../header.ejs') %>
     <main>
-        <h2>
-            Szczegóły naprawy
-        </h2>
-        <form class="form" novalidate onsubmit="return validateForm();">  
+        <h2><%= pageTitle %></h2>
+        <form class="form" novalidate"> 
         <label for="damage" class="bold-txt">Uszkodzenia: </label>
         <input type="text" name="damage" value="<%= repair.OpisUszkodzenia %>" id="damage" disabled />
         <span id="errorRepairDamage" class="errors-text"></span>
@@ -23,9 +21,7 @@
 
         <label for="car" class="bold-txt">Pojazd (Rejestracja): </label>
         <input type="text" name="car" value="<%= repair.Pojazd.Tablica_Rejestracyjna %>" id="car" disabled />
-        <span class="errors-text"></span>
-
-        
+        <span class="errors-text"></span> 
     </form>
     <a href="/repair/edit/<%= repair.id_Naprawa %>" class="list-actions-button-edit">Edytuj</a>  
     <h2>

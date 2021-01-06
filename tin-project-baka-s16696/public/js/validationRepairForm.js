@@ -1,4 +1,3 @@
-
 function validateForm() {
 
     const RepairDamage = document.getElementById('damage');

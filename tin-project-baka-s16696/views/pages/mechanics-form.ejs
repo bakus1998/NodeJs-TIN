@@ -1,24 +1,41 @@
 <%- include('../header.ejs') %>
     <main>
         <h2><%= pageTitle %></h2>
-
         <script type="application/javascript" src="/js/validationEmpForm.js"></script>
         <script type="application/javascript" src="/js/validationCommon.js"></script>
         
-        <form class="form" method="POST" action="<%=formAction%>" ovalidate onsubmit="return validateForm();">
+        <form class="form" method="post" action="<%=formAction%>" novalidate onsubmit="return validateForm();">
+
             <label for="lastname">Nazwisko:<abbr title="required" aria-label="required">*</abbr></label>
-            <input type="text" name="Nazwisko" id="lastname" placeholder="2-60 znaków" />
-            <span id="errorLastName" class="errors-text"></span>
-        
+            <input class="<%= validationErrors.find(e => e.path.includes('Nazwisko')) ? 'error-input' : '' %>" value="<%=emp.Nazwisko %>" type="text" name="Nazwisko" id="lastname" placeholder="2-60 znaków" />
+            <span id="errorLastName" class="errors-text">
+                <% if (validationErrors.find(e => e.path.includes('Nazwisko'))) { %>
+                    <%= validationErrors.find(e => e.path.includes('Nazwisko')).message %>
+                <% } %>
+            </span>
+            
 
         <label for="firstname">Imię:<abbr title="required" aria-label="required">*</abbr></label>
-        <input type="text" name="Imie" id="firstname" placeholder="2-60 znaków" />
-        <span id="errorFirstName" class="errors-text"></span>
+        <input class="<%= validationErrors.find(e => e.path.includes('Imie')) ? 'error-input' : '' %>" value="<%=emp.Imie %>" type="text" name="Imie" id="firstname" placeholder="2-60 znaków" />
+        <span id="errorFirstName" class="errors-text">
+            <% if (validationErrors.find(e => e.path.includes('Imie'))) { %>
+                <p><%= validationErrors.find(e => e.path.includes('Imie')).schema %></p>
+                <%= validationErrors.find(e => e.path.includes('Imie')).message %>
+            <% } %>
 
+        </span>
+        
 
         <label for="exp">Doświadczenie:<abbr title="required" aria-label="required">*</abbr></label>
-        <input type="text" name="Doswiadczenie" id="exp" placeholder="do 100 znaków" />
-        <span id="errorExp" class="errors-text"></span>
+        <input class="<%= validationErrors.find(e => e.path.includes('Doswiadczenie')) ? 'error-input' : '' %>" value="<%=emp.Doswiadczenie %>" type="text" name="Doswiadczenie" id="exp" placeholder="1-100 znaków" />
+        <span id="errorExp" class="errors-text">
+            <% if (validationErrors.find(e => e.path.includes('Doswiadczenie'))) { %>
+                <%= validationErrors.find(e => e.path.includes('Doswiadczenie')).message %>
+            <% } %>
+        </span>
+        
+        <input type="hidden" name="id_mechanic" value="<%= emp.id_mechanic %>">
+
     
     <div class="form-buttons">
     <p id="errorsSummary" class="errors-text"></p>

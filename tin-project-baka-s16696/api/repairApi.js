@@ -11,8 +11,6 @@ exports.getRepairs = (req, res, next) => {
 };
 
 
-
-
 exports.deleteRepair = (req, res, next) => {
     const repairId = req.params.repairId;
     repairRepository.deleteRepair(repairId)
@@ -26,8 +24,6 @@ exports.deleteRepair = (req, res, next) => {
             next(err);
         });
 };
-
-
 
 
 exports.createRepair = (req, res, next) => {

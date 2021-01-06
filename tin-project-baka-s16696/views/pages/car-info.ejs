@@ -1,7 +1,7 @@
 <%- include('../header.ejs') %>
     <main>
         <h2><%= pageTitle %></h2>
-        <form class="form" novalidate onsubmit="return validateForm();">   
+        <form class="form" novalidate">   
 
         <label for="carName" class="bold-txt">Marka: </label>
         <input type="text" name="Marka" value="<%= car.Marka %>" id="carName" disabled />
@@ -47,23 +47,7 @@
             <% } %>
         </tbody>
 
-        
-        <!-- <tbody>
-            <tr>
-                <td>Uszkodzona chłodnica</td>
-                <td>Adam</td>
-                <td>2020-10-24</td>
-                <td>1760 zł</td>
-            
-            </tr>
-            <tr>
-                <td>Uszkodzony zderzak</td>
-                <td>Stefan</td>
-                <td>2020-10-24</td>
-                <td>900 zł</td>
-            
-            </tr>
-        </tbody> -->
+
         </table>
         <% } else{ %>  
             <h3>Brak napraw</h3>

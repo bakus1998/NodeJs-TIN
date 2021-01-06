@@ -1,30 +1,60 @@
 <%- include('../header.ejs') %>
-
-
     <script type="application/javascript" src="/js/validationCarForm.js"></script>
     <script type="application/javascript" src="/js/validationCommon.js"></script>
+    
     <main>
         <h2><%= pageTitle %></h2>
 
-        <form class="form" method="POST" action="<%=formAction%>" novalidate onsubmit="return validateForm();">        
+        <form class="form" method="post" action="<%=formAction%>" novalidate onsubmit="return validateForm();">           
         <label for="carName">Marka: <abbr title="required" aria-label="required">*</abbr></label>
-        <input type="text" name="Marka" value="<%= car.Marka %>" id="carName" placeholder="2-20 znaków"/>
-        <span id="errorCarName" class="errors-text"></span>
+
+        <% if (!(Object.keys(validationErrors).length === 0)) {%>
+            <input class="<%= validationErrors.find(e => e.path.includes('Marka')) ? 'error-input' : '' %>" type="text" name="Marka" value="<%= car.Marka %>" id="carName" placeholder="2-20 znaków"/>
+        <% } else{ %>  
+            <input type="text" name="Marka" value="<%= car.Marka %>" id="carName" placeholder="2-20 znaków"/>
+        <% } %>
+        <span id="errorCarName" class="errors-text">
+            <% if (!(Object.keys(validationErrors).length === 0)) {%>
+                <% if (validationErrors.find(e => e.path.includes('Marka'))) { %>
+                    <%= validationErrors.find(e => e.path.includes('Marka')).message %>
+                <% } %>
+            <% } %>
+        </span>
+
+
 
         <label for="idr">Rejestracja: <abbr title="required" aria-label="required">*</abbr></label>
-        <input type="text" name="Tablica_Rejestracyjna" value="<%= car.Tablica_Rejestracyjna %>" id="idr" placeholder="do 10 znaków"/>
-        <span id="errorCarIdr" class="errors-text"></span>
+
+        <% if (!(Object.keys(validationErrors).length === 0)) {%>
+            <input class="<%= validationErrors.find(e => e.path.includes('Tablica_Rejestracyjna')) ? 'error-input' : '' %>" type="text" name="Tablica_Rejestracyjna" value="<%= car.Tablica_Rejestracyjna %>" id="idr" placeholder="do 10 znaków"/>
+        <% } else{ %>  
+            <input type="text" name="Tablica_Rejestracyjna" value="<%= car.Tablica_Rejestracyjna %>" id="idr" placeholder="do 10 znaków"/>
+            <% } %>
+        <span id="errorCarIdr" class="errors-text">
+            <% if (!(Object.keys(validationErrors).length === 0)) {%>
+                <% if (validationErrors.find(e => e.path.includes('Tablica_Rejestracyjna'))) { %>
+                    <%= validationErrors.find(e => e.path.includes('Tablica_Rejestracyjna')).message %>
+                <% } %>
+            <% } %>
+        </span>
+
+
 
         <label for="mileage">Przebieg: <abbr title="required" aria-label="required">*</abbr></label>
         <input type="number" name="Przebieg" value="<%= car.Przebieg %>" id="mileage">
-        <span id="errorCarMileage" class="errors-text"></span>
+        <span id="errorCarMileage" class="errors-text">
+            <% if (!(Object.keys(validationErrors).length === 0)) {%>
+                <% if (validationErrors.find(e => e.path.includes('Przebieg'))) { %>
+                    <%= validationErrors.find(e => e.path.includes('Przebieg')).message %>
+                <% } %>
+            <% } %>
+        </span>
 
+        
         <input type="hidden" name="id_Pojazd" value="<%= car.id_Pojazd %>">
         
         <label for="km_mil">Jednostka:</label>
         <select name="Jednostka_KmMil" id="km_mil">
-
-
             <%if (car.Jednostka_KmMil == "km") { %>
                 <option value="km" selected>Kilometry</option>
                 <option value="mil">Mile</option>
@@ -32,9 +62,14 @@
                     <option value="km">Kilometry</option>
                     <option value="mil" selected>Mile</option>
                  <% } %>
-
         </select>
-        <span class="errors-text"></span>
+        <span id="errorKmMil" class="errors-text"></span>
+            <% if (!(Object.keys(validationErrors).length === 0)) {%>
+                <% if (validationErrors.find(e => e.path.includes('Jednostka_KmMil'))) { %>
+                    <%= validationErrors.find(e => e.path.includes('Jednostka_KmMil')).message %>
+                <% } %>
+            <% } %>
+        </span>
 
     <div class="form-buttons">
     <p id="errorsSummary" class="errors-text"></p>

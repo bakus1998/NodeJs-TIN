@@ -1,4 +1,7 @@
 const db = require('../../config/mysql2/db');
+const empSchema = require('../../model/joi/Mechanic');
+const empSchemaa = require('../../model/joi/Mechanicshow');
+
 
 exports.getMechanics = () =>{
     return db.promise().query('Select * From Mechanik')
@@ -15,7 +18,6 @@ exports.getMechanics = () =>{
 
 exports.deleteMechanic = (mechanicId) =>{
     const sql = 'DELETE FROM Naprawa WHERE id_mechanik = ?'
-    //return db.promise().execute(sql, [mechanicId]);
     return db.promise().query(sql, [mechanicId])
     .then( (results, fields) => {
       const sql2 = 'DELETE FROM Mechanik WHERE id_mechanik = ?'
@@ -27,7 +29,18 @@ exports.deleteMechanic = (mechanicId) =>{
     });
 };
 
+exports.createMechanicShow = () => {
+    const vRes = empSchemaa.validate(null, { abortEarly: false} );
+    if(vRes.error) {
+        return Promise.reject(vRes.error);
+    }
+}
+
 exports.createMechanic = (newMechanicData) => {
+    const vRes = empSchema.validate(newMechanicData, { abortEarly: false} );
+    if(vRes.error) {
+        return Promise.reject(vRes.error);
+    }
     const Imie = newMechanicData.Imie;
     const Nazwisko = newMechanicData.Nazwisko;
     const Doswiadczenie = newMechanicData.Doswiadczenie;
@@ -107,9 +120,21 @@ return db.promise().query(query, [mechanicId])
 
 
 exports.updateMechanic = (mechanicId, MechanicData) => {
+    const vRes = empSchema.validate(MechanicData, { abortEarly: false} );
+    if(vRes.error) {
+        return Promise.reject(vRes.error);
+    }
     const Imie = MechanicData.Imie;
     const Nazwisko = MechanicData.Nazwisko;
     const Doswiadczenie = MechanicData.Doswiadczenie;
     const sql = `UPDATE Mechanik set Imie = ?, Nazwisko = ?, Doswiadczenie = ? where id_mechanik = ?`;
     return db.promise().execute(sql, [Imie, Nazwisko, Doswiadczenie, mechanicId]);
 };
+
+
+exports.updateMechanicShow = () => {
+    const vRes = empSchemaa.validate(null, { abortEarly: false} );
+    if(vRes.error) {
+        return Promise.reject(vRes.error);
+    }
+}
