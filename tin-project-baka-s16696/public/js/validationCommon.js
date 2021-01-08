@@ -111,7 +111,7 @@ function checkDateIfAfter(value, compareTo) {
     }
     const valueDate = new Date(value);
     const compareToDate = new Date(compareTo);
-    if (valueDate.getTime() < compareToDate.getTime()) {
+    if (valueDate.getTime() <= compareToDate.getTime()) {
         return false;
     }
     return true;
