@@ -15,6 +15,12 @@ const errMessages = (errors) => {
             case "string.max":
                 err.message = `Pole powinno zawierać co najwyżej ${err.local.limit} znaki`;
                 break;
+            case "number.min":
+                    err.message = `Przebieg musi wynosić powyżej ${err.local.limit}`;
+                    break;
+            case "number.max":
+                    err.message = `Przebieg musi wynosić poniżej ${err.local.limit}`;
+                    break;
             default:
                 break;
         }
@@ -25,6 +31,7 @@ const errMessages = (errors) => {
 
 const empSchema = Joi.object({
     Przebieg: Joi.number()
+        .min(1).max(2000000)
         .required().error(errMessages),
     Marka: Joi.string()
         .min(2)
