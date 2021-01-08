@@ -40,7 +40,7 @@ function validateForm() {
     } else if (!isItRightMileage(CarMileage.value)) {
         valid = false;
         CarMileage.classList.add("error-input");
-        errorCarMileage.innerText = "Przebieg musi mieć poniżej 2.000.000";
+        errorCarMileage.innerText = "Przebieg musi wynosić powyżej 0 i poniżej 2.000.000";
     }
 
     if (!valid) {

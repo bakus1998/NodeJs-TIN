@@ -46,11 +46,17 @@ function checkMaxLength(value, max) {
 
 function isItRightMileage(value){
     let v = parseInt(value,10);
-        if(v<=2000000){
-            return true;
-        }else{
+
+        if(v<=0){
             return false;
+        }else{
+            if(v<=2000000){
+                return true;
+            }else{
+                return false;
+            }
         }
+
 }
 
 function checkNumberRange(value, min, max) {
