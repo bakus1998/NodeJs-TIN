@@ -1,5 +1,11 @@
 <%- include('../header.ejs') %>
     <main>
+        <% if (komunikat === true) {%>   
+            <p style="color:green">Stworzono mechanika</p>
+        <% } %>
+        <% if (komunikatedycja === true) {%>   
+            <p style="color:green">Zmodyfikowano mechanika</p>
+        <% } %>
         <h2>Lista pracowników</h2>
     <table class="table-list">
     <thead>
@@ -21,15 +27,14 @@
                     <ul class="list-actions">
                         <li><a href="/mechanics/details/<%=emp.id_mechanik%>" class="list-actions-button-details">Szczegóły</a></li>
                         <li><a href="/mechanics/edit/<%=emp.id_mechanik%>" class="list-actions-button-edit">Edytuj</a></li>
-                        <li><a href="/mechanics/delete/<%=emp.id_mechanik%>" class="list-actions-button-delete">Usuń</a></li>
+                        <li><a href="/mechanics/delete/<%=emp.id_mechanik%>" onclick="return confirm('Czy chcesz usunąć ten rekord?')" class="list-actions-button-delete">Usuń</a></li>
+
                     </ul>
                 </td>
             </tr>
         <% } %>
 
     </tbody>
-
-
     </table>
 
     <p><a href="/mechanics/add" class="button-add">Dodaj nowego mechanika</a></p>

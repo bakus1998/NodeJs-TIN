@@ -3,6 +3,7 @@
         <h2><%= pageTitle %></h2>
         <script type="application/javascript" src="/js/validationEmpForm.js"></script>
         <script type="application/javascript" src="/js/validationCommon.js"></script>
+
         
         <form class="form" method="post" action="<%=formAction%>" novalidate onsubmit="return validateForm();">
 
@@ -26,21 +27,45 @@
         </span>
         
 
-        <label for="exp">Doświadczenie:<abbr title="required" aria-label="required">*</abbr></label>
+        <label for="exp">Doświadczenie: <abbr title="required" aria-label="required">*</abbr></label>
         <input class="<%= validationErrors.find(e => e.path.includes('Doswiadczenie')) ? 'error-input' : '' %>" value="<%=emp.Doswiadczenie %>" type="text" name="Doswiadczenie" id="exp" placeholder="1-100 znaków" />
         <span id="errorExp" class="errors-text">
             <% if (validationErrors.find(e => e.path.includes('Doswiadczenie'))) { %>
                 <%= validationErrors.find(e => e.path.includes('Doswiadczenie')).message %>
             <% } %>
         </span>
+
+        <label for="login">Email: <abbr title="required" aria-label="required">*</abbr></label>
+        <input class="<%= validationErrors.find(e => e.path.includes('login')) ? 'error-input' : '' %>" value="<%=emp.login %>" type="text" name="login" id="exp" placeholder="" />
+        <span id="errorLogin" class="errors-text">
+            <% if (validationErrors.find(e => e.path.includes('login'))) { %>
+                <%= validationErrors.find(e => e.path.includes('login')).message %>
+            <% } %>
+        </span>
         
+
+        <label for="password">Hasło: <abbr title="required" aria-label="required">*</abbr></label>
+        <input class="<%= validationErrors.find(e => e.path.includes('password')) ? 'error-input' : '' %>" value="<%=emp.password %>" type="password" name="password" id="exp" placeholder="od 3 znaków" />
+        <span id="errorPassword" class="errors-text">
+            <% if (validationErrors.find(e => e.path.includes('password'))) { %>
+                <%= validationErrors.find(e => e.path.includes('password')).message %>
+            <% } %>
+        </span>
+
+
         <input type="hidden" name="id_mechanic" value="<%= emp.id_mechanic %>">
 
     
     <div class="form-buttons">
     <p id="errorsSummary" class="errors-text"></p>
     <input type="submit" value="Dodaj" class="form-button-submit"/>
-    <a href="/mechanics" class="form-button-cancel">Anuluj</a>  
+
+    <% if(loggedUser) { %>
+        <a href="/mechanics" class="form-button-cancel">Anuluj</a>  
+    <% } else { %>
+        <a href="/" class="form-button-cancel">Anuluj</a>  
+    <% } %>
+
     </div>
 
 </form>

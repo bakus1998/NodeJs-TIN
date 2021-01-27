@@ -1,11 +1,11 @@
 <%- include('../header.ejs') %>
-    <script type="application/javascript" src="/js/validationCarForm.js"></script>
-    <script type="application/javascript" src="/js/validationCommon.js"></script>
+    <!-- <script type="application/javascript" src="/js/validationCarForm.js"></script>
+    <script type="application/javascript" src="/js/validationCommon.js"></script> -->
     
     <main>
         <h2><%= pageTitle %></h2>
 
-        <form class="form" method="post" action="<%=formAction%>" novalidate onsubmit="return validateForm();">           
+        <form class="form" method="post" action="<%=formAction%>" novalidate>           
         <label for="carName">Marka: <abbr title="required" aria-label="required">*</abbr></label>
 
         <% if (!(Object.keys(validationErrors).length === 0)) {%>

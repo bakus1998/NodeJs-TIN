@@ -38,6 +38,12 @@ const empSchema = Joi.object({
     Doswiadczenie: Joi.string()
         .min(1)
         .max(100)
+        .error(errMessages),
+    login: Joi.string()
+        .email()
+        .max(100).error(errMessages),
+    password: Joi.string()
+        .min(3)
         .error(errMessages)
 });
 

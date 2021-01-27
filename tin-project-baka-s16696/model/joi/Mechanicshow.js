@@ -11,7 +11,12 @@ const empSchema = Joi.object({
         .required(),
     Doswiadczenie: Joi.string()
         .max(100)
-        .required()
+        .required(),
+        login: Joi.string()
+        .email(),
+    password: Joi.string()
+        .min(1)
+        .max(20)
 });
 
 module.exports = empSchema;

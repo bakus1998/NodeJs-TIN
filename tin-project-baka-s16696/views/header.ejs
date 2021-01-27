@@ -15,9 +15,14 @@
     </header>
     <nav>
         <ul>
+            <% if(loggedUser) { %>
             <li><a href="/" class="<%= navLocation == 'main' ? 'active' : ''%>">Strona główna</a></li>
             <li><a href="/mechanics" class="<%= navLocation == 'mechanic' ? 'active' : ''%>">Lista mechaników</a></li>
             <li><a href="/car" class="<%= navLocation == 'car' ? 'active' : ''%>">Lista pojazdów</a></li>
             <li><a href="/repair" class="<%= navLocation == 'repair' ? 'active' : ''%>">Naprawy</a></li>
+            <% } else { %>
+                <li><a href="/" class="<%= navLocation == 'main' ? 'active' : ''%>">Strona główna</a></li>
+                <li><a href="/createUser/add" class="<%= navLocation == 'register' ? 'active' : ''%>">Zarejestruj się!</a></li>
+            <% } %>
         </ul>
     </nav>

@@ -8,12 +8,32 @@ var indexRouter = require('./routes/index');
 const mechanicRouter = require('./routes/mechanicRoute');
 const carRouter = require('./routes/carRoute');
 const repairRouter = require('./routes/repairRoute');
+const createNewUserRoute = require('./routes/createNewUserRoute');
 
 const mechanicApiRouter = require('./routes/api/MechanicApiRoute');
 const carApiRouter = require('./routes/api/CarApiRoute');
 const repairApiRouter = require('./routes/api/RepairApiRoute');
 
+const authUtil = require('./util/authUtils');
+
+
 var app = express();
+
+//user session
+const session = require('express-session');
+app.use(session({
+    secret: 'my_secret_password',
+    resave: false
+}));
+
+app.use((req, res, next) => {
+  const loggedUser = req.session.loggedUser;
+  res.locals.loggedUser = loggedUser;
+  if(!res.locals.loginError) {
+      res.locals.loginError = undefined;
+  }
+  next();
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -26,9 +46,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/mechanics',mechanicRouter);
-app.use('/car', carRouter);
-app.use('/repair',repairRouter);
+app.use('/mechanics',authUtil.permitAuthenticatedUser,mechanicRouter);
+app.use('/car',authUtil.permitAuthenticatedUser, carRouter);
+app.use('/repair',authUtil.permitAuthenticatedUser,repairRouter);
+app.use('/createUser',createNewUserRoute);
 
 //api
 app.use('/api/mechanics',mechanicApiRouter);

@@ -1,6 +1,8 @@
 const db = require('../../config/mysql2/db');
 const empSchema = require('../../model/joi/Mechanic');
 const empSchemaa = require('../../model/joi/Mechanicshow');
+const authUtil = require('../../util/authUtils');
+const passHash = authUtil.hashPassword('12345');
 
 
 exports.getMechanics = () =>{
@@ -41,16 +43,46 @@ exports.createMechanic = (newMechanicData) => {
     if(vRes.error) {
         return Promise.reject(vRes.error);
     }
-    const Imie = newMechanicData.Imie;
-    const Nazwisko = newMechanicData.Nazwisko;
-    const Doswiadczenie = newMechanicData.Doswiadczenie;
-    const sql = 'INSERT into Mechanik (Imie, Nazwisko, Doswiadczenie) VALUES (?, ?, ?)'
-    return db.promise().execute(sql, [Imie, Nazwisko, Doswiadczenie]);
+
+    return checkEmailUnique(newMechanicData.login)
+    .then(emailErr => {
+        if(emailErr) {
+
+            return Promise.reject(emailErr);
+        } else {
+            const Imie = newMechanicData.Imie;
+            const Nazwisko = newMechanicData.Nazwisko;
+            const Doswiadczenie = newMechanicData.Doswiadczenie;
+            const login = newMechanicData.login;
+            const password = newMechanicData.password;
+            const passHashed = authUtil.hashPassword(password);
+            const sql = 'INSERT into Mechanik (Imie, Nazwisko, Doswiadczenie, login, password) VALUES (?, ?, ?,?,?)'
+            return db.promise().execute(sql, [Imie, Nazwisko, Doswiadczenie, login,passHashed]);
+        }
+    })
+    .catch(err => {
+        console.log("TU WYWALA SIE");
+        console.log();
+        if (Object.keys(err).length === 0) {
+            console.log("IF");
+            const Imie = newMechanicData.Imie;
+            const Nazwisko = newMechanicData.Nazwisko;
+            const Doswiadczenie = newMechanicData.Doswiadczenie;
+            const login = newMechanicData.login;
+            const password = newMechanicData.password;
+            const passHashed = authUtil.hashPassword(password);
+            const sql = 'INSERT into Mechanik (Imie, Nazwisko, Doswiadczenie, login, password) VALUES (?, ?, ?,?,?)'
+            return db.promise().execute(sql, [Imie, Nazwisko, Doswiadczenie, login,passHashed]);
+        }else{
+            console.log("else");
+        }
+        return Promise.reject(err);
+    });
 };
 
 exports.getMechanicById = (mechanicId) =>{
     const query = 
-    `SELECT m.Nazwisko, m.Imie, m.Doswiadczenie, n.OpisUszkodzenia,
+    `SELECT m.Nazwisko, m.Imie, m.Doswiadczenie, n.OpisUszkodzenia,m.login,
     p.Tablica_Rejestracyjna, p.Przebieg, n.DataNaprawy, n.KosztNaprawy, n.id_Naprawa, p.id_Pojazd, m.id_mechanik, p.Jednostka_KmMil
     FROM Mechanik m
     JOIN Naprawa n
@@ -60,7 +92,7 @@ exports.getMechanicById = (mechanicId) =>{
     WHERE m.id_mechanik= ?`
 
     const queryWithoutNaprawa = 
-    `Select id_mechanik,Nazwisko, Imie, Doswiadczenie
+    `Select id_mechanik,Nazwisko, Imie, Doswiadczenie, login
     FROM Mechanik
     WHERE id_mechanik= ?`
 
@@ -75,6 +107,7 @@ return db.promise().query(query, [mechanicId])
                     Imie: results2[0][0].Imie,
                     Nazwisko: results2[0][0].Nazwisko,
                     Doswiadczenie: results2[0][0].Doswiadczenie,
+                    login: results2[0][0].login,
                     naprawy: []
                 }
 
@@ -90,6 +123,7 @@ return db.promise().query(query, [mechanicId])
             Imie: firstRow.Imie,
             Nazwisko: firstRow.Nazwisko,
             Doswiadczenie: firstRow.Doswiadczenie,
+            login: firstRow.login,
             naprawy: []
         }
         for( let i=0; i<results[0].length; i++ ) {
@@ -124,11 +158,63 @@ exports.updateMechanic = (mechanicId, MechanicData) => {
     if(vRes.error) {
         return Promise.reject(vRes.error);
     }
-    const Imie = MechanicData.Imie;
-    const Nazwisko = MechanicData.Nazwisko;
-    const Doswiadczenie = MechanicData.Doswiadczenie;
-    const sql = `UPDATE Mechanik set Imie = ?, Nazwisko = ?, Doswiadczenie = ? where id_mechanik = ?`;
-    return db.promise().execute(sql, [Imie, Nazwisko, Doswiadczenie, mechanicId]);
+    // const Imie = MechanicData.Imie;
+    // const Nazwisko = MechanicData.Nazwisko;
+    // const Doswiadczenie = MechanicData.Doswiadczenie;
+    // const login = MechanicData.login;
+    // const password = MechanicData.password;
+    // const passHashed = authUtil.hashPassword(password);
+
+
+
+    // const sql = `UPDATE Mechanik set Imie = ?, Nazwisko = ?, Doswiadczenie = ?, login=?, password=? where id_mechanik = ?`;
+    // return db.promise().execute(sql, [Imie, Nazwisko, Doswiadczenie,login,passHashed, mechanicId]);
+
+
+
+
+
+
+    return checkEmailUnique(MechanicData.login, mechanicId)
+    .then(emailErr => {
+        if(emailErr) {
+
+            return Promise.reject(emailErr);
+        } else {
+            const Imie = MechanicData.Imie;
+            const Nazwisko = MechanicData.Nazwisko;
+            const Doswiadczenie = MechanicData.Doswiadczenie;
+            const login = MechanicData.login;
+            const password = MechanicData.password;
+            const passHashed = authUtil.hashPassword(password);
+        
+        
+        
+            const sql = `UPDATE Mechanik set Imie = ?, Nazwisko = ?, Doswiadczenie = ?, login=?, password=? where id_mechanik = ?`;
+            return db.promise().execute(sql, [Imie, Nazwisko, Doswiadczenie,login,passHashed, mechanicId]);
+        }
+    })
+    .catch(err => {
+        console.log("TU WYWALA SIE");
+        console.log();
+        if (Object.keys(err).length === 0) {
+            console.log("IF");
+            const Imie = MechanicData.Imie;
+            const Nazwisko = MechanicData.Nazwisko;
+            const Doswiadczenie = MechanicData.Doswiadczenie;
+            const login = MechanicData.login;
+            const password = MechanicData.password;
+            const passHashed = authUtil.hashPassword(password);
+        
+            const sql = `UPDATE Mechanik set Imie = ?, Nazwisko = ?, Doswiadczenie = ?, login=?, password=? where id_mechanik = ?`;
+            return db.promise().execute(sql, [Imie, Nazwisko, Doswiadczenie,login,passHashed, mechanicId]);
+        }else{
+            console.log("else");
+        }
+        return Promise.reject(err);
+    });
+
+
 };
 
 
@@ -138,3 +224,57 @@ exports.updateMechanicShow = () => {
         return Promise.reject(vRes.error);
     }
 }
+
+// checkEmailUnique = (email) => {
+//     let sql, promise;
+//         sql = `SELECT COUNT(1) as c FROM Mechanik where login = ?`;
+//         promise = db.promise().query(sql, [email]);
+
+//     return promise.then( (results, fields) => {
+//         const count = results[0][0].c;
+//         let err = {};
+//         if(count > 0) {
+//             err = {
+//                 details: [{
+//                     path: ['login'],
+//                     message: 'Podany adres email jest już używany'
+//                 }]
+//             };
+           
+//         }
+//         return err;
+//     });
+// }
+
+
+
+
+
+
+checkEmailUnique = (email, empId) => {
+    let sql, promise;
+    if(empId) {
+        sql = `SELECT COUNT(1) as c FROM Mechanik where id_mechanik != ? and login = ?`;
+        promise = db.promise().query(sql, [empId, email]);
+    } else {
+        sql = `SELECT COUNT(1) as c FROM Mechanik where login = ?`;
+        promise = db.promise().query(sql, [email]);
+    }
+    return promise.then( (results, fields) => {
+        const count = results[0][0].c;
+        let err = {};
+        if(count > 0) {
+            err = {
+                details: [{
+                    path: ['login'],
+                    message: 'Podany adres email jest już używany'
+                }]
+            };
+        }
+        return err;
+    });
+}
+
+
+
+

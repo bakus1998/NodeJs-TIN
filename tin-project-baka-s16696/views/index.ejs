@@ -1,6 +1,36 @@
 <%- include('./header.ejs') %>
 
+
         <main>
+            
+            <% if (komunikat === true) {%>   
+                  <p style="color:green">Zostałeś zarejestrowany! Możesz teraz się zalogować.</p>
+            <% } %>
+
+            <% if (komunikatzaloguj === true) {%>   
+                <p style="color:red">Brak uprawnień! Zaloguj się, bądź zarejestruj.</p>
+          <% } %>
+          
+
+            <% if(!loggedUser) { %>
+                <div id="login">
+                    <h5>Logowanie</h5>
+                    <form method="post" action="/login" novalidate>
+                        <label for="login">Login:</label>
+                        <input type="login" id="login" name="login">
+            
+                        <label for="password">Hasło:</label>
+                        <input type="password" id="password" name="password">
+            
+                        <input type="submit" value="Zaloguj się">
+                        <span id="loginErrors"><%= loginError ? loginError : ''%></span>
+                    </form>
+                </div>
+            <% } else { %>
+                <span>Witaj <b><%=loggedUser.imie%></b>, jesteś zalogowany email: <b><%=loggedUser.login%></b></span>
+                <br>
+                <a href="/logout">Wyloguj się</a>
+            <% } %>
             <h2>Strona główna</h2>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto nulla cum esse quas odio nam illo perferendis. Eius temporibus excepturi aliquam magnam eos dolorum nobis ducimus similique, voluptatem velit eligendi.
             </p>

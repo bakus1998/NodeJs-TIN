@@ -9,7 +9,9 @@ exports.showRepairList = (req, res, next) => {
     .then(repairs => {
         res.render('pages/repair-list', {
             repairs: repairs,
-            navLocation: 'repair'
+            navLocation: 'repair',
+            komunikat: false,
+            komunikatedycja: false
         });
     });
 }
@@ -47,7 +49,15 @@ exports.addRepair = (req, res, next) => {
     console.log(req.body);
     RepairRepository.createRepair(repairData)
         .then( result => {
-            res.redirect('/repair');
+            RepairRepository.getRepairs()
+            .then(repairs => {
+                res.render('pages/repair-list', {
+                    repairs: repairs,
+                    navLocation: 'repair',
+                    komunikat: true,
+                    komunikatedycja: false
+                });
+            });
         }).catch(err => {
             let allEmps, allDepts;
             MechanicRepository.getMechanics()
@@ -128,7 +138,15 @@ exports.updateRepairEdit = (req, res, next) => {
     let carEdit;
     RepairRepository.updateRepair(repairId,repairData)
         .then( result => {
-            res.redirect('/repair');
+            RepairRepository.getRepairs()
+            .then(repairs => {
+                res.render('pages/repair-list', {
+                    repairs: repairs,
+                    navLocation: 'repair',
+                    komunikat: false,
+                    komunikatedycja: true
+                });
+            });
         }).catch(err => {
             RepairRepository.getRepairById(repairId)
             .then(repair => {

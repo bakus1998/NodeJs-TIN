@@ -7,7 +7,9 @@ exports.showCarList = (req, res, next) => {
     .then(cars => {
         res.render('pages/cars-list', {
             cars: cars,
-            navLocation: 'car'
+            navLocation: 'car',
+            komunikat: false,
+            komunikatedycja: false
         });
     });
 }
@@ -36,7 +38,15 @@ exports.addCar = (req, res, next) => {
     const carData = { ...req.body };
     CarRepository.createCar(carData)
         .then( result => {
-            res.redirect('/car');
+            CarRepository.getCars()
+            .then(cars => {
+                res.render('pages/cars-list', {
+                    cars: cars,
+                    navLocation: 'car',
+                    komunikat: true,
+                    komunikatedycja: false
+                });
+            });
         }).catch(err => {
             console.log(err);
             res.render('pages/car-form', {
@@ -89,7 +99,15 @@ exports.updateCarEdit = (req, res, next) => {
     const carData = { ...req.body };
     CarRepository.updateCar(carId,carData)
         .then( result => {
-            res.redirect('/car');
+            CarRepository.getCars()
+            .then(cars => {
+                res.render('pages/cars-list', {
+                    cars: cars,
+                    navLocation: 'car',
+                    komunikat: false,
+                    komunikatedycja: true
+                });
+            });
         }).catch(err => {
             res.render('pages/car-edit', {
                 car: carData,
